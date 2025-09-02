@@ -5,8 +5,8 @@
       v-if="variant === 'simple'"
       class="theme-toggle-button simple"
       @click="toggleTheme"
-      :title="`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} theme`"
-      :aria-label="`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} theme`"
+      :title="`Switch to ${currentTheme === 'high-contrast' ? 'default' : 'high-contrast'} theme`"
+      :aria-label="`Switch to ${currentTheme === 'high-contrast' ? 'default' : 'high-contrast'} theme`"
     >
       <span class="theme-icon">{{ currentIcon }}</span>
     </button>
@@ -61,10 +61,10 @@
     <div v-else-if="variant === 'segmented'" class="theme-segmented">
       <div class="segmented-control">
         <button
-          v-for="theme in ['light', 'dark']"
+          v-for="theme in availableThemes"
           :key="theme"
           class="segmented-option"
-          :class="{ active: resolvedTheme === theme }"
+          :class="{ active: currentTheme === theme }"
           @click="setTheme(theme as Theme)"
         >
           <span class="theme-icon">{{ themeIcons[theme as Theme] }}</span>
@@ -88,14 +88,11 @@ withDefaults(defineProps<Props>(), {
   showLabel: false,
 })
 
-const { currentTheme, resolvedTheme, setTheme, toggleTheme, themeLabels, themeIcons } = useTheme()
+const { currentTheme, availableThemes, setTheme, toggleTheme, themeLabels, themeIcons } = useTheme()
 
 // Dropdown state
 const isDropdownOpen = ref(false)
 const dropdownRef = ref<HTMLElement>()
-
-// Available themes for dropdown
-const availableThemes: Theme[] = ['light', 'dark', 'auto', 'high-contrast']
 
 // Current theme display
 const currentIcon = computed(() => themeIcons.value[currentTheme.value as Theme])

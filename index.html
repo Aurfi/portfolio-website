@@ -18,34 +18,19 @@
     />
     <meta name="author" content="Portfolio Owner" />
 
-    <!-- Security Headers - Temporarily relaxed for debugging -->
+    <!-- Security Headers -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://api.github.com; frame-ancestors 'none';"
+      content="default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com;"
     />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
 
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#2563eb" />
-    <meta name="background-color" content="#ffffff" />
-    <link rel="manifest" href="/manifest.json" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://aurfi.github.io/portfolio-website/" />
 
-    <!-- Apple PWA Meta Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Portfolio" />
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.svg" />
-
-    <!-- Microsoft PWA Meta Tags -->
-    <meta name="msapplication-TileColor" content="#2563eb" />
-    <meta name="msapplication-TileImage" content="/icons/icon-144x144.svg" />
-    <meta name="msapplication-config" content="/browserconfig.xml" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -72,19 +57,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://api.github.com" />
 
-    <!-- Google Analytics (replace GA_MEASUREMENT_ID with your actual ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      gtag('config', 'GA_MEASUREMENT_ID', {
-        page_title: document.title,
-        page_location: window.location.href,
-      })
-    </script>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -116,8 +88,5 @@
 
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
-
-    <!-- PWA Install Prompt (will be handled by JavaScript) -->
-    <div id="pwa-install-prompt" style="display: none"></div>
   </body>
 </html>

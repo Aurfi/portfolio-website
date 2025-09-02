@@ -54,22 +54,13 @@
           </div>
         </div>
       </div>
-
-      <!-- Scroll indicator -->
-      <div class="scroll-indicator">
-        <button class="scroll-button" @click="scrollToNext" :aria-label="$t('hero.scrollDown')">
-          <svg class="scroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M7 13l3 3 3-3"></path>
-            <path d="M7 6l3 3 3-3"></path>
-          </svg>
-        </button>
-      </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import PersonalLogo from '@/components/ui/PersonalLogo.vue'
 
 interface Props {
@@ -78,24 +69,20 @@ interface Props {
 
 defineProps<Props>()
 
+const router = useRouter()
+
 // Skills to display
 const skills = computed(() => ['Vue.js', 'TypeScript', 'Node.js', 'Docker', 'Spring Boot'])
 
 // Navigation functions
 const scrollToProjects = () => {
-  const element = document.getElementById('projects')
-  element?.scrollIntoView({ behavior: 'smooth' })
+  router.push('/projects')
 }
 
 const scrollToContact = () => {
-  const element = document.getElementById('contact')
-  element?.scrollIntoView({ behavior: 'smooth' })
+  router.push('/contact')
 }
 
-const scrollToNext = () => {
-  const element = document.getElementById('projects')
-  element?.scrollIntoView({ behavior: 'smooth' })
-}
 </script>
 
 <style lang="scss" scoped>
@@ -161,11 +148,43 @@ const scrollToNext = () => {
 
   .name {
     display: block;
-    background: linear-gradient(135deg, $primary-color, $secondary-color);
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      $primary-color 0%,
+      $primary-light 25%,
+      $secondary-color 50%,
+      $secondary-light 75%,
+      $primary-color 100%
+    );
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: fadeInUp 0.8s ease-out 0.2s both;
+    animation: 
+      fadeInUp 0.8s $ease-out-quart 0.2s both, 
+      appleGradientFlow 24s $ease-in-out-quart infinite,
+      subtleBreathing 8s $ease-in-out-quart infinite;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        45deg,
+        rgba($primary-color, 0.1) 0%,
+        rgba($secondary-color, 0.1) 100%
+      );
+      background-size: 400% 400%;
+      border-radius: 8px;
+      opacity: 0.6;
+      filter: blur(20px);
+      z-index: -1;
+      animation: appleGlowFlow 32s $ease-in-out-quart infinite;
+    }
   }
 }
 
@@ -301,25 +320,135 @@ const scrollToNext = () => {
   overflow: hidden;
   position: relative;
   z-index: 2;
-  border: 4px solid rgba($primary-color, 0.2);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 20px 40px rgba($primary-color, 0.15),
+    0 8px 32px rgba($secondary-color, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.6s $ease-out-quart;
+  
+  // Subtle ring animation
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: linear-gradient(
+      45deg,
+      rgba($primary-color, 0.3) 0%,
+      rgba($secondary-color, 0.2) 50%,
+      rgba($primary-color, 0.3) 100%
+    );
+    background-size: 200% 200%;
+    animation: subtleRingFlow 16s $ease-in-out-quart infinite;
+    z-index: -1;
+    opacity: 0.6;
+  }
+  
+  
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 
+      0 24px 48px rgba($primary-color, 0.2),
+      0 12px 36px rgba($secondary-color, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
 }
 
 .image-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  border-radius: 50%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  
+  // Main gradient layer
+  background: linear-gradient(
+    135deg,
+    $primary-color 0%,
+    $secondary-color 50%,
+    $primary-color 100%
+  );
+  background-size: 400% 400%;
+  animation: 
+    appleGradientFlow 28s $ease-in-out-quart infinite,
+    avatarBreathing 16s $ease-in-out-quart infinite;
+  
+  // Subtle overlay gradient for depth
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    background-size: 300% 300%;
+    animation: subtleShimmer 20s $ease-in-out-quart infinite;
+    pointer-events: none;
+  }
+  
+  // Ambient glow effect
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    right: -10%;
+    bottom: -10%;
+    background: linear-gradient(
+      135deg,
+      rgba($primary-color, 0.2) 0%,
+      rgba($secondary-color, 0.15) 100%
+    );
+    background-size: 300% 300%;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.7;
+    z-index: -1;
+    animation: appleGlowFlow 36s $ease-in-out-quart infinite;
+  }
+
+  :deep(svg) {
+    width: 80% !important;
+    height: 80% !important;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+    display: block !important;
+    margin: 0 auto !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    animation: counterBreathing 16s $ease-in-out-quart infinite !important;
+  }
+
+  :deep(text) {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+  }
 
   .initials {
-    font-size: 4rem;
+    font-size: 6rem;
     font-weight: 700;
     color: white;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
 
     @include respond-to(lg) {
-      font-size: 5rem;
+      font-size: 8rem;
     }
   }
 }
@@ -335,81 +464,64 @@ const scrollToNext = () => {
 
 .floating-element {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background: rgba($secondary-color, 0.3);
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  animation: float 6s ease-in-out infinite;
+  filter: blur(0.5px);
+  opacity: 0.4;
+  animation: appleFloat 12s $ease-in-out-quart infinite;
 
   &:nth-child(1) {
     top: 20%;
     left: 10%;
     animation-delay: 0s;
+    background: linear-gradient(135deg, rgba($secondary-color, 0.2), rgba($secondary-light, 0.15));
+    width: 18px;
+    height: 18px;
   }
 
   &:nth-child(2) {
     top: 60%;
     left: 80%;
-    animation-delay: 1s;
-    background: rgba($primary-color, 0.3);
+    animation-delay: 2s;
+    background: linear-gradient(135deg, rgba($primary-color, 0.25), rgba($primary-light, 0.2));
   }
 
   &:nth-child(3) {
     top: 80%;
     left: 20%;
-    animation-delay: 2s;
+    animation-delay: 4s;
+    background: linear-gradient(135deg, rgba($secondary-color, 0.15), rgba($secondary-light, 0.1));
+    width: 14px;
+    height: 14px;
   }
 
   &:nth-child(4) {
     top: 30%;
     left: 90%;
-    animation-delay: 3s;
-    background: rgba($secondary-color, 0.2);
+    animation-delay: 6s;
+    background: linear-gradient(135deg, rgba($secondary-color, 0.1), rgba($secondary-light, 0.08));
+    width: 12px;
+    height: 12px;
   }
 
   &:nth-child(5) {
     top: 10%;
     left: 70%;
-    animation-delay: 4s;
+    animation-delay: 8s;
+    background: linear-gradient(135deg, rgba($primary-color, 0.2), rgba($primary-light, 0.15));
+    width: 20px;
+    height: 20px;
   }
 
   &:nth-child(6) {
     top: 70%;
     left: 5%;
-    animation-delay: 5s;
-    background: rgba($primary-color, 0.2);
+    animation-delay: 10s;
+    background: linear-gradient(135deg, rgba($primary-color, 0.15), rgba($primary-light, 0.1));
   }
 }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: $spacing-xl;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: fadeInUp 1s ease-out 1s both;
-}
-
-.scroll-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: $text-color-light;
-  transition: all $transition-normal;
-  padding: $spacing-sm;
-  border-radius: 50%;
-
-  &:hover {
-    color: $primary-color;
-    background: rgba($primary-color, 0.1);
-    transform: translateY(-2px);
-  }
-}
-
-.scroll-icon {
-  width: 24px;
-  height: 24px;
-  animation: bounce 2s infinite;
-}
 
 // Animations
 @keyframes fadeInUp {
@@ -444,19 +556,171 @@ const scrollToNext = () => {
   }
 }
 
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
+// Apple-like floating with reduced motion and organic movement
+@keyframes appleFloat {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-8px) translateX(3px) scale(1.05);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-12px) translateX(-2px) scale(0.95);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translateY(-6px) translateX(1px) scale(1.02);
+    opacity: 0.6;
+  }
   100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.3;
   }
 }
+
+// Apple-like gradient animations with organic, subtle movement
+@keyframes appleGradientFlow {
+  0% {
+    background-position: 0% 20%;
+  }
+  20% {
+    background-position: 40% 30%;
+  }
+  40% {
+    background-position: 80% 60%;
+  }
+  60% {
+    background-position: 90% 90%;
+  }
+  80% {
+    background-position: 20% 70%;
+  }
+  100% {
+    background-position: 0% 20%;
+  }
+}
+
+// Subtle breathing effect for text
+@keyframes subtleBreathing {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.005);
+    filter: brightness(1.05);
+  }
+}
+
+// Ambient glow animation
+@keyframes appleGlowFlow {
+  0% {
+    background-position: 0% 50%;
+    opacity: 0.5;
+    filter: blur(40px);
+  }
+  12.5% {
+    background-position: 25% 75%;
+    opacity: 0.6;
+    filter: blur(35px);
+  }
+  25% {
+    background-position: 50% 100%;
+    opacity: 0.7;
+    filter: blur(30px);
+  }
+  37.5% {
+    background-position: 75% 75%;
+    opacity: 0.8;
+    filter: blur(25px);
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.75;
+    filter: blur(30px);
+  }
+  62.5% {
+    background-position: 75% 25%;
+    opacity: 0.7;
+    filter: blur(35px);
+  }
+  75% {
+    background-position: 50% 0%;
+    opacity: 0.6;
+    filter: blur(40px);
+  }
+  87.5% {
+    background-position: 25% 25%;
+    opacity: 0.55;
+    filter: blur(42px);
+  }
+  100% {
+    background-position: 0% 50%;
+    opacity: 0.5;
+    filter: blur(40px);
+  }
+}
+
+// Subtle shimmer overlay
+@keyframes subtleShimmer {
+  0% {
+    background-position: -100% 0%;
+    opacity: 0.1;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 0.2;
+  }
+  100% {
+    background-position: -100% 0%;
+    opacity: 0.1;
+  }
+}
+
+// Avatar gentle pulse
+@keyframes avatarBreathing {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.75);
+  }
+}
+
+// Counter-scale for SVG to keep it fixed size
+@keyframes counterBreathing {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.33);
+  }
+}
+
+// Subtle ring flow around avatar
+@keyframes subtleRingFlow {
+  0% {
+    background-position: 0% 50%;
+    opacity: 0.4;
+  }
+  25% {
+    background-position: 100% 0%;
+    opacity: 0.6;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 0.5;
+  }
+  75% {
+    background-position: 0% 100%;
+    opacity: 0.7;
+  }
+  100% {
+    background-position: 0% 50%;
+    opacity: 0.4;
+  }
+}
+
 </style>

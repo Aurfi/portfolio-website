@@ -46,9 +46,6 @@
           <div class="app-footer__language">
             <LanguageSelector size="small" />
           </div>
-          <div class="app-footer__theme">
-            <ThemeToggle variant="dropdown" />
-          </div>
         </div>
       </div>
     </div>
@@ -67,7 +64,6 @@ import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
 import PersonalLogo from '@/components/ui/PersonalLogo.vue'
 import LanguageSelector from '@/components/ui/LanguageSelector.vue'
-import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 
 const { t } = useI18n()
 

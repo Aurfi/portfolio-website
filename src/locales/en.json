@@ -50,6 +50,12 @@
     "subtitle": "Passionate developer with a focus on creating innovative solutions",
     "description1": "I am a full-stack developer with over 5 years of experience building web applications and digital solutions. I specialize in modern JavaScript frameworks, backend development, and creating seamless user experiences.",
     "description2": "When I am not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.",
+    "quickTitle": "A Bit About Me",
+    "quickDescription": "I'm a passionate full-stack developer who loves building innovative web applications and solving complex problems. With expertise in modern technologies, I create digital experiences that are both beautiful and functional.",
+    "frontend": "Frontend",
+    "backend": "Backend", 
+    "tools": "Tools & DevOps",
+    "learnMore": "Learn More About Me",
     "experience": "Professional Experience",
     "testimonials": "What People Say",
     "downloadResume": "Download Resume",
@@ -106,6 +112,12 @@
     "contact": "Contact",
     "selectLanguage": "Select Language",
     "aiDisclaimer": "This portfolio website was created with AI assistance"
+  },
+  "cta": {
+    "title": "Let's Work Together",
+    "description": "Ready to bring your ideas to life?",
+    "getInTouch": "Get In Touch",
+    "viewProjects": "View All Projects"
   },
   "common": {
     "loading": "Loading...",

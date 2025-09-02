@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onErrorCaptured, defineProps, defineEmits } from 'vue'
+import { ref, onErrorCaptured } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   useErrorHandler,

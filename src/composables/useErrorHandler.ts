@@ -237,28 +237,18 @@ export function useErrorHandler(): ErrorHandler {
 
 // Global error handler
 export function setupGlobalErrorHandler() {
-  const { handle } = useErrorHandler()
-
   // Handle unhandled promise rejections
   window.addEventListener('unhandledrejection', (event) => {
-    handle(new Error(event.reason), {
-      category: ErrorCategory.UNKNOWN,
-      severity: ErrorSeverity.HIGH,
-      additional: { reason: event.reason },
-    })
+    console.error('Unhandled promise rejection:', event.reason)
     event.preventDefault()
   })
 
   // Handle global errors
   window.addEventListener('error', (event) => {
-    handle(new Error(event.message), {
-      category: ErrorCategory.CLIENT,
-      severity: ErrorSeverity.HIGH,
-      additional: {
-        filename: event.filename,
-        lineno: event.lineno,
-        colno: event.colno,
-      },
+    console.error('Global error:', event.message, {
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
     })
     event.preventDefault()
   })

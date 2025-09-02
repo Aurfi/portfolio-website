@@ -39,9 +39,7 @@
     <!-- Projects Grid -->
     <section
       class="projects-grid"
-      :class="{ loading: isLoading }"
       aria-labelledby="projects-heading"
-      :aria-busy="isLoading"
     >
       <h2 id="projects-heading" class="sr-only">
         {{ selectedCategory === 'all' ? 'All Projects' : getCurrentCategoryName() + ' Projects' }}
@@ -81,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { projectCategories, getProjectsByCategory } from '@/data/projects'
 import type { Project } from '@/types'
 import ProjectCard from './ProjectCard.vue'
@@ -94,7 +92,6 @@ const { announce } = useAccessibility()
 // Reactive state
 const selectedCategory = ref('all')
 const selectedProject = ref<Project | null>(null)
-const isLoading = ref(true)
 
 // Computed properties
 const categories = computed(() => projectCategories)
@@ -131,13 +128,6 @@ const closeProjectModal = () => {
   selectedProject.value = null
 }
 
-// Lifecycle
-onMounted(() => {
-  // Simulate loading for smooth transition
-  setTimeout(() => {
-    isLoading.value = false
-  }, 300)
-})
 </script>
 
 <style lang="scss" scoped>
@@ -266,11 +256,6 @@ onMounted(() => {
 // Projects Grid
 .projects-grid {
   margin-bottom: $spacing-xxl;
-
-  &.loading {
-    opacity: 0.7;
-    pointer-events: none;
-  }
 }
 
 .grid-container {

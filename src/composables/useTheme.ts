@@ -1,49 +1,21 @@
 import { ref, computed, watch, onMounted } from 'vue'
 
-export type Theme = 'light' | 'dark' | 'auto' | 'high-contrast'
+// Simplified theme type - easy to extend in the future
+export type Theme = 'default' | 'high-contrast'
 
 const THEME_STORAGE_KEY = 'portfolio-theme'
 
 export function useTheme() {
-  const currentTheme = ref<Theme>('auto')
-  const systemPrefersDark = ref(false)
-
-  // Computed actual theme (resolves 'auto' to light/dark)
-  const resolvedTheme = computed(() => {
-    if (currentTheme.value === 'auto') {
-      return systemPrefersDark.value ? 'dark' : 'light'
-    }
-    return currentTheme.value
-  })
+  const currentTheme = ref<Theme>('default')
 
   // Apply theme to document
   const applyTheme = (theme: Theme) => {
-    const resolvedValue = theme === 'auto' ? (systemPrefersDark.value ? 'dark' : 'light') : theme
-
     // Remove all theme attributes
     document.documentElement.removeAttribute('data-theme')
 
-    // Apply new theme if not light (light is default)
-    if (resolvedValue !== 'light') {
-      document.documentElement.setAttribute('data-theme', resolvedValue)
-    }
-
-    // Update meta theme-color for mobile browsers
-    updateMetaThemeColor(resolvedValue)
-  }
-
-  // Update meta theme-color for mobile browsers
-  const updateMetaThemeColor = (theme: string) => {
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]')
-    const color = theme === 'dark' ? '#111827' : '#ffffff'
-
-    if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', color)
-    } else {
-      const meta = document.createElement('meta')
-      meta.name = 'theme-color'
-      meta.content = color
-      document.head.appendChild(meta)
+    // Apply new theme if not default
+    if (theme !== 'default') {
+      document.documentElement.setAttribute('data-theme', theme)
     }
   }
 
@@ -54,39 +26,19 @@ export function useTheme() {
     applyTheme(theme)
   }
 
-  // Toggle between light and dark
+  // Toggle between default and high-contrast
   const toggleTheme = () => {
-    const newTheme = resolvedTheme.value === 'dark' ? 'light' : 'dark'
+    const newTheme = currentTheme.value === 'high-contrast' ? 'default' : 'high-contrast'
     setTheme(newTheme)
   }
 
-  // Cycle through all themes
-  const cycleTheme = () => {
-    const themes: Theme[] = ['light', 'dark', 'auto', 'high-contrast']
-    const currentIndex = themes.indexOf(currentTheme.value)
-    const nextIndex = (currentIndex + 1) % themes.length
-    setTheme(themes[nextIndex])
-  }
-
-  // Initialize theme from localStorage or system preference
+  // Initialize theme from localStorage
   const initializeTheme = () => {
     // Check for saved theme preference
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme
-    if (savedTheme && ['light', 'dark', 'auto', 'high-contrast'].includes(savedTheme)) {
+    if (savedTheme && ['default', 'high-contrast'].includes(savedTheme)) {
       currentTheme.value = savedTheme
     }
-
-    // Set up system preference detection
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    systemPrefersDark.value = mediaQuery.matches
-
-    // Listen for system preference changes
-    mediaQuery.addEventListener('change', (e) => {
-      systemPrefersDark.value = e.matches
-      if (currentTheme.value === 'auto') {
-        applyTheme('auto')
-      }
-    })
 
     // Apply initial theme
     applyTheme(currentTheme.value)
@@ -99,19 +51,18 @@ export function useTheme() {
 
   // Theme labels for UI
   const themeLabels = computed(() => ({
-    light: 'Light',
-    dark: 'Dark',
-    auto: 'Auto',
+    'default': 'Default',
     'high-contrast': 'High Contrast',
   }))
 
   // Theme icons for UI
   const themeIcons = computed(() => ({
-    light: '☀️',
-    dark: '🌙',
-    auto: '🔄',
+    'default': '🎨',
     'high-contrast': '⚡',
   }))
+
+  // Available themes for future extension
+  const availableThemes = computed<Theme[]>(() => ['default', 'high-contrast'])
 
   // Initialize on mount
   onMounted(() => {
@@ -120,11 +71,9 @@ export function useTheme() {
 
   return {
     currentTheme: readonly(currentTheme),
-    resolvedTheme,
-    systemPrefersDark: readonly(systemPrefersDark),
+    availableThemes,
     setTheme,
     toggleTheme,
-    cycleTheme,
     themeLabels,
     themeIcons,
     initializeTheme,

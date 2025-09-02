@@ -18,14 +18,25 @@
         </defs>
 
         <!-- Modern geometric design -->
-        <circle cx="50" cy="50" r="45" fill="url(#logoGradient)" opacity="0.1" />
         <path
           d="M25 35 L50 20 L75 35 L75 65 L50 80 L25 65 Z"
           fill="url(#logoGradient)"
           opacity="0.8"
         />
         <circle cx="50" cy="50" r="15" fill="var(--color-background)" />
+        
+        <!-- Profile image if provided -->
+        <foreignObject v-if="profileImage" x="35" y="35" width="30" height="30">
+          <img 
+            :src="profileImage" 
+            alt="Profile" 
+            style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"
+          />
+        </foreignObject>
+        
+        <!-- Initial text if no image -->
         <text
+          v-else
           x="50"
           y="58"
           text-anchor="middle"
@@ -34,7 +45,7 @@
           font-weight="700"
           font-size="18"
         >
-          {{ initials }}
+          {{ initials.charAt(0) || 'J' }}
         </text>
       </svg>
     </div>
@@ -87,6 +98,7 @@ interface Props {
   showTagline?: boolean
   fullName?: string
   tagline?: string
+  profileImage?: string // URL for profile picture
 }
 
 const props = withDefaults(defineProps<Props>(), {

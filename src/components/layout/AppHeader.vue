@@ -26,10 +26,6 @@
             </router-link>
           </nav>
 
-          <!-- Header Actions -->
-          <div class="header-actions">
-            <ThemeToggle variant="simple" />
-          </div>
 
           <!-- Mobile Menu Toggle -->
           <button
@@ -76,7 +72,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import PersonalLogo from '@/components/ui/PersonalLogo.vue'
-import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 import type { NavigationItem } from '@/types'
 
 const isMobileMenuOpen = ref(false)
