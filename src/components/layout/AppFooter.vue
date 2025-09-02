@@ -67,6 +67,7 @@ const currentYear = computed(() => new Date().getFullYear())
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 @use '@/assets/styles/variables.scss' as *;
 @use '@/assets/styles/mixins.scss' as *;
 
@@ -178,7 +179,7 @@ const currentYear = computed(() => new Date().getFullYear())
 
   &__bottom {
     border-top: 1px solid $border-color;
-    background-color: darken($background-light, 3%);
+    background-color: color.adjust($background-light, $lightness: -3%);
     padding: $spacing-md 0;
   }
 

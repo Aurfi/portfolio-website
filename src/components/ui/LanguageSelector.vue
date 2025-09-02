@@ -139,6 +139,7 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 @use '@/assets/styles/variables.scss' as *;
 
 .language-selector {
@@ -157,7 +158,7 @@ onUnmounted(() => {
   transition: border-color $transition-normal;
 
   &:hover {
-    border-color: darken($border-color, 10%);
+    border-color: color.adjust($border-color, $lightness: -10%);
   }
 
   &:focus {
@@ -199,7 +200,7 @@ onUnmounted(() => {
     transition: all $transition-normal;
 
     &:hover {
-      border-color: darken($border-color, 10%);
+      border-color: color.adjust($border-color, $lightness: -10%);
       background-color: $background-light;
     }
 

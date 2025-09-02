@@ -161,6 +161,7 @@ const scrollToContact = () => {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 @use '@/assets/styles/variables.scss' as *;
 @use '@/assets/styles/mixins.scss' as *;
 
@@ -292,7 +293,7 @@ const scrollToContact = () => {
   border-color: $primary-color;
 
   &:hover {
-    background: darken($primary-color, 10%);
+    background: color.adjust($primary-color, $lightness: -10%);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba($primary-color, 0.3);
   }

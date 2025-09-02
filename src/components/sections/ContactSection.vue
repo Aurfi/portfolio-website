@@ -330,6 +330,7 @@ const submitForm = async () => {
 </script>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 @use '@/assets/styles/variables.scss' as *;
 @use '@/assets/styles/mixins.scss' as *;
 
@@ -530,7 +531,7 @@ const submitForm = async () => {
   transition: all $transition-normal;
 
   &:hover:not(:disabled) {
-    background: darken($primary-color, 10%);
+    background: color.adjust($primary-color, $lightness: -10%);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba($primary-color, 0.3);
   }
