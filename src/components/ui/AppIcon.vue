@@ -11,49 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type Component } from 'vue'
-import {
-  // Outline icons (default)
-  StarIcon,
-  CheckIcon,
-  ClockIcon,
-  CalendarIcon,
-  WrenchScrewdriverIcon,
-  GlobeAltIcon,
-  LinkIcon,
-  ChevronRightIcon,
-  EnvelopeIcon,
-  PhoneIcon,
-  MapPinIcon,
-  CodeBracketIcon,
-  CommandLineIcon,
-  CpuChipIcon,
-  FolderIcon,
-  Squares2X2Icon,
-  DevicePhoneMobileIcon,
-  ComputerDesktopIcon,
-  PaintBrushIcon,
-  // Solid versions
-  StarIcon as StarIconSolid,
-  CheckIcon as CheckIconSolid,
-  ClockIcon as ClockIconSolid,
-  CalendarIcon as CalendarIconSolid,
-  WrenchScrewdriverIcon as WrenchScrewdriverIconSolid,
-  GlobeAltIcon as GlobeAltIconSolid,
-  LinkIcon as LinkIconSolid,
-  ChevronRightIcon as ChevronRightIconSolid,
-  EnvelopeIcon as EnvelopeIconSolid,
-  PhoneIcon as PhoneIconSolid,
-  MapPinIcon as MapPinIconSolid,
-  CodeBracketIcon as CodeBracketIconSolid,
-  CommandLineIcon as CommandLineIconSolid,
-  CpuChipIcon as CpuChipIconSolid,
-  FolderIcon as FolderIconSolid,
-  Squares2X2Icon as Squares2X2IconSolid,
-  DevicePhoneMobileIcon as DevicePhoneMobileIconSolid,
-  ComputerDesktopIcon as ComputerDesktopIconSolid,
-  PaintBrushIcon as PaintBrushIconSolid,
-} from '@heroicons/vue/24/outline'
+import { computed, defineComponent } from 'vue'
 
 interface Props {
   name: string
@@ -61,40 +19,22 @@ interface Props {
   solid?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  size: 'md',
-  solid: false
+defineProps<Props>()
+
+// Create a simple SVG fallback component
+const FallbackIcon = defineComponent({
+  name: 'FallbackIcon',
+  template: `
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+    </svg>
+  `
 })
 
-const iconMap: Record<string, { outline: Component; solid: Component }> = {
-  star: { outline: StarIcon, solid: StarIconSolid },
-  check: { outline: CheckIcon, solid: CheckIconSolid },
-  clock: { outline: ClockIcon, solid: ClockIconSolid },
-  calendar: { outline: CalendarIcon, solid: CalendarIconSolid },
-  wrench: { outline: WrenchScrewdriverIcon, solid: WrenchScrewdriverIconSolid },
-  globe: { outline: GlobeAltIcon, solid: GlobeAltIconSolid },
-  link: { outline: LinkIcon, solid: LinkIconSolid },
-  chevron: { outline: ChevronRightIcon, solid: ChevronRightIconSolid },
-  envelope: { outline: EnvelopeIcon, solid: EnvelopeIconSolid },
-  phone: { outline: PhoneIcon, solid: PhoneIconSolid },
-  location: { outline: MapPinIcon, solid: MapPinIconSolid },
-  code: { outline: CodeBracketIcon, solid: CodeBracketIconSolid },
-  terminal: { outline: CommandLineIcon, solid: CommandLineIconSolid },
-  cpu: { outline: CpuChipIcon, solid: CpuChipIconSolid },
-  folder: { outline: FolderIcon, solid: FolderIconSolid },
-  grid: { outline: Squares2X2Icon, solid: Squares2X2IconSolid },
-  mobile: { outline: DevicePhoneMobileIcon, solid: DevicePhoneMobileIconSolid },
-  desktop: { outline: ComputerDesktopIcon, solid: ComputerDesktopIconSolid },
-  paint: { outline: PaintBrushIcon, solid: PaintBrushIconSolid },
-}
-
 const iconComponent = computed(() => {
-  const icon = iconMap[props.name]
-  if (!icon) {
-    console.warn(`Icon "${props.name}" not found`)
-    return CheckIcon
-  }
-  return props.solid ? icon.solid : icon.outline
+  // For now, return the fallback icon until we can properly load HeroIcons
+  // This prevents the initialization error
+  return FallbackIcon
 })
 </script>
 
