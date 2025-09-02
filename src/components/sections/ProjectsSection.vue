@@ -67,7 +67,7 @@ const featuredProjects = computed(() => [
     title: 'Enterprise Business Application',
     description:
       'A comprehensive business management system with microservices architecture, featuring order management, inventory tracking, and analytics dashboard.',
-    image: '/images/projects/business-app.svg',
+    image: `${import.meta.env.BASE_URL}images/projects/business-app.svg`,
     technologies: ['Spring Boot', 'Vue.js', 'PostgreSQL', 'Docker', 'Redis'],
   },
   {
@@ -75,7 +75,7 @@ const featuredProjects = computed(() => [
     title: 'Modern Frontend Showcase',
     description:
       'An interactive demonstration of advanced Vue.js patterns, component libraries, and real-time features with elegant animations.',
-    image: '/images/projects/frontend-showcase.svg',
+    image: `${import.meta.env.BASE_URL}images/projects/frontend-showcase.svg`,
     technologies: ['Vue.js 3', 'TypeScript', 'Pinia', 'WebSocket', 'SCSS'],
   },
   {
@@ -83,7 +83,7 @@ const featuredProjects = computed(() => [
     title: 'Progressive Web Application',
     description:
       'A mobile-first PWA with offline capabilities, push notifications, and native-like user experience for food ordering.',
-    image: '/images/projects/mobile-pwa.svg',
+    image: `${import.meta.env.BASE_URL}images/projects/mobile-pwa.svg`,
     technologies: ['PWA', 'Hono.js', 'IndexedDB', 'Service Worker', 'WebPush'],
   },
 ])
