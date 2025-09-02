@@ -88,7 +88,6 @@ export default defineConfig({
         pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.trace'],
       },
     },
-    target: 'es2020', // Updated for better performance
     cssTarget: 'chrome80', // Better CSS support
     reportCompressedSize: true, // Report compressed size
     rollupOptions: {
