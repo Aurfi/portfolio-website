@@ -28,7 +28,9 @@ export const isArray: TypeGuard<unknown[]> = (value): value is unknown[] => {
   return Array.isArray(value)
 }
 
-export const isObject: TypeGuard<Record<string, unknown>> = (value): value is Record<string, unknown> => {
+export const isObject: TypeGuard<Record<string, unknown>> = (
+  value
+): value is Record<string, unknown> => {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
 
@@ -40,7 +42,7 @@ export const isUndefined: TypeGuard<undefined> = (value): value is undefined => 
   return value === undefined
 }
 
-export const isFunction: TypeGuard<Function> = (value): value is Function => {
+export const isFunction = (value: unknown): value is (...args: unknown[]) => unknown => {
   return typeof value === 'function'
 }
 
@@ -166,7 +168,7 @@ export function validateForm(schema: FormSchema): ValidationResult {
 
   return {
     valid: errors.length === 0,
-    errors: errors.length > 0 ? errors : undefined
+    errors: errors.length > 0 ? errors : undefined,
   }
 }
 
@@ -180,41 +182,38 @@ export interface ApiResponseSchema {
 
 export function validateApiResponse(response: unknown): response is ApiResponseSchema {
   if (!isObject(response)) return false
-  
+
   const res = response as Record<string, unknown>
-  
+
   // Check status if present
   if ('status' in res && res.status !== 'success' && res.status !== 'error') {
     return false
   }
-  
+
   // Check message if present
   if ('message' in res && !isString(res.message)) {
     return false
   }
-  
+
   // Check errors if present
   if ('errors' in res && !isArray(res.errors)) {
     return false
   }
-  
+
   return true
 }
 
 // LocalStorage validation
-export function validateLocalStorageData<T>(
-  key: string,
-  validator: TypeGuard<T>
-): T | null {
+export function validateLocalStorageData<T>(key: string, validator: TypeGuard<T>): T | null {
   try {
     const raw = localStorage.getItem(key)
     if (!raw) return null
-    
+
     const data = JSON.parse(raw)
     if (validator(data)) {
       return data
     }
-    
+
     console.warn(`Invalid data in localStorage for key: ${key}`)
     return null
   } catch (error) {
@@ -240,44 +239,44 @@ export interface AppConfig {
 
 export function validateAppConfig(config: unknown): config is AppConfig {
   if (!isObject(config)) return false
-  
+
   const cfg = config as Record<string, unknown>
-  
+
   // Validate apiUrl
   if ('apiUrl' in cfg && !isString(cfg.apiUrl)) {
     return false
   }
-  
+
   // Validate version
   if ('version' in cfg && !isString(cfg.version)) {
     return false
   }
-  
+
   // Validate features
   if ('features' in cfg) {
     if (!isObject(cfg.features)) return false
     const features = cfg.features as Record<string, unknown>
-    
+
     if ('analytics' in features && !isBoolean(features.analytics)) return false
     if ('pwa' in features && !isBoolean(features.pwa)) return false
     if ('i18n' in features && !isBoolean(features.i18n)) return false
   }
-  
+
   // Validate theme
   if ('theme' in cfg) {
     if (!isObject(cfg.theme)) return false
     const theme = cfg.theme as Record<string, unknown>
-    
+
     if ('default' in theme) {
       const validThemes = ['light', 'dark', 'auto']
       if (!validThemes.includes(theme.default as string)) return false
     }
-    
+
     if ('allowUserSelection' in theme && !isBoolean(theme.allowUserSelection)) {
       return false
     }
   }
-  
+
   return true
 }
 
@@ -287,16 +286,16 @@ export function createValidator<T>(
 ): TypeGuard<T> {
   return (value: unknown): value is T => {
     if (!isObject(value)) return false
-    
+
     const obj = value as Record<string, unknown>
-    
+
     for (const [key, validatorFn] of Object.entries(schema)) {
       const validator = validatorFn as (value: unknown) => boolean
       if (!(key in obj) || !validator(obj[key])) {
         return false
       }
     }
-    
+
     return true
   }
 }
@@ -310,38 +309,39 @@ export interface ContactFormData {
 }
 
 export const validateContactForm = (data: unknown): ValidationResult => {
+  const formData = data as Record<string, unknown>
   const schema: FormSchema = {
     name: {
-      value: (data as any)?.name,
+      value: formData?.name,
       required: true,
       type: 'string',
       min: 2,
-      max: 100
+      max: 100,
     },
     email: {
-      value: (data as any)?.email,
+      value: formData?.email,
       required: true,
-      type: 'email'
+      type: 'email',
     },
     message: {
-      value: (data as any)?.message,
+      value: formData?.message,
       required: true,
       type: 'string',
       min: 10,
-      max: 1000
+      max: 1000,
     },
     phone: {
-      value: (data as any)?.phone,
+      value: formData?.phone,
       required: false,
       type: 'string',
-      pattern: /^[\d\s\-\+\(\)]+$/,
+      pattern: /^[\d\s\-+()]+$/,
       custom: (value) => {
         if (!value) return true
         const cleaned = String(value).replace(/\D/g, '')
         return cleaned.length >= 10 ? true : 'Phone number must be at least 10 digits'
-      }
-    }
+      },
+    },
   }
-  
+
   return validateForm(schema)
 }

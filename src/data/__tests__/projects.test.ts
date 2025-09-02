@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import { projects, projectCategories, getFeaturedProjects, getProjectsByCategory, getProjectById } from '../projects'
+import {
+  projects,
+  projectCategories,
+  getFeaturedProjects,
+  getProjectsByCategory,
+  getProjectById,
+} from '../projects'
 
 describe('Projects Data', () => {
   it('has valid project structure', () => {
@@ -9,7 +15,7 @@ describe('Projects Data', () => {
   })
 
   it('all projects have required fields', () => {
-    projects.forEach(project => {
+    projects.forEach((project) => {
       expect(project.id).toBeDefined()
       expect(project.title.en).toBeDefined()
       expect(project.description.en).toBeDefined()
@@ -32,8 +38,8 @@ describe('Projects Data', () => {
     expect(projectCategories).toBeDefined()
     expect(Array.isArray(projectCategories)).toBe(true)
     expect(projectCategories.length).toBeGreaterThan(0)
-    
-    projectCategories.forEach(category => {
+
+    projectCategories.forEach((category) => {
       expect(category.id).toBeDefined()
       expect(category.name.en).toBeDefined()
       expect(category.color).toBeDefined()
@@ -44,7 +50,7 @@ describe('Projects Data', () => {
   it('getFeaturedProjects returns only featured projects', () => {
     const featured = getFeaturedProjects()
     expect(Array.isArray(featured)).toBe(true)
-    featured.forEach(project => {
+    featured.forEach((project) => {
       expect(project.featured).toBe(true)
     })
   })
@@ -52,9 +58,9 @@ describe('Projects Data', () => {
   it('getProjectsByCategory filters correctly', () => {
     const allProjects = getProjectsByCategory('all')
     expect(allProjects).toEqual(projects)
-    
+
     const webApps = getProjectsByCategory('web-app')
-    webApps.forEach(project => {
+    webApps.forEach((project) => {
       expect(project.category.id).toBe('web-app')
     })
   })
@@ -63,20 +69,20 @@ describe('Projects Data', () => {
     const firstProject = projects[0]
     const foundProject = getProjectById(firstProject.id)
     expect(foundProject).toEqual(firstProject)
-    
+
     const nonExistent = getProjectById('non-existent-id')
     expect(nonExistent).toBeUndefined()
   })
 
   it('all project IDs are unique', () => {
-    const ids = projects.map(p => p.id)
+    const ids = projects.map((p) => p.id)
     const uniqueIds = new Set(ids)
     expect(uniqueIds.size).toBe(ids.length)
   })
 
   it('all projects have valid complexity levels', () => {
     const validLevels = ['simple', 'intermediate', 'complex', 'enterprise']
-    projects.forEach(project => {
+    projects.forEach((project) => {
       expect(validLevels).toContain(project.complexity.level)
       expect(Array.isArray(project.complexity.indicators)).toBe(true)
       expect(project.complexity.indicators.length).toBeGreaterThan(0)

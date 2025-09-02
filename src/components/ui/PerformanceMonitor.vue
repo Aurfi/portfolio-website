@@ -143,7 +143,7 @@ const initWebVitals = async () => {
       delta: number
       id: string
     }
-    
+
     const handleMetric = (metric: Metric) => {
       const webVital: WebVitalMetric = {
         name: metric.name,

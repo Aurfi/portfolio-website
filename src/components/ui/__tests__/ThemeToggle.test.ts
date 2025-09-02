@@ -31,7 +31,7 @@ describe('ThemeToggle', () => {
   it('has proper accessibility attributes', () => {
     const wrapper = mount(ThemeToggle)
     const button = wrapper.find('button')
-    
+
     expect(button.attributes('aria-label')).toBeDefined()
     // The button doesn't have type="button" explicitly, but that's okay for Vue components
     expect(button.exists()).toBe(true)
@@ -40,9 +40,9 @@ describe('ThemeToggle', () => {
   it('toggles theme when clicked', async () => {
     const wrapper = mount(ThemeToggle)
     const button = wrapper.find('button')
-    
+
     await button.trigger('click')
-    
+
     // Should have called the theme toggle functionality
     expect(wrapper.emitted()).toBeDefined()
   })

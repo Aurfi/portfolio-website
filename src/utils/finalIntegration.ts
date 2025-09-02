@@ -619,10 +619,10 @@ export class FinalIntegration {
         l?: number
       }
 
-      const windowWithGtag = window as WindowWithGtag & { 
+      const windowWithGtag = window as WindowWithGtag & {
         gtag?: GtagFunction
       }
-      
+
       if (!windowWithGtag.gtag) {
         const gtagFn: GtagFunction = function (...args: unknown[]) {
           gtagFn.q = gtagFn.q || []
@@ -630,7 +630,7 @@ export class FinalIntegration {
         }
         windowWithGtag.gtag = gtagFn
       }
-      
+
       if (windowWithGtag.gtag) {
         windowWithGtag.gtag.l = +new Date()
       }

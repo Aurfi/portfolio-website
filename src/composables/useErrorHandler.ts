@@ -5,7 +5,7 @@ export enum ErrorSeverity {
   LOW = 'low',
   MEDIUM = 'medium',
   HIGH = 'high',
-  CRITICAL = 'critical'
+  CRITICAL = 'critical',
 }
 
 export enum ErrorCategory {
@@ -16,7 +16,7 @@ export enum ErrorCategory {
   NOT_FOUND = 'not_found',
   SERVER = 'server',
   CLIENT = 'client',
-  UNKNOWN = 'unknown'
+  UNKNOWN = 'unknown',
 }
 
 export interface ErrorContext {
@@ -51,8 +51,8 @@ export function useErrorHandler(): ErrorHandler {
   const router = useRouter()
 
   const hasErrors = computed(() => errors.value.length > 0)
-  const criticalErrors = computed(() => 
-    errors.value.filter(e => e.severity === ErrorSeverity.CRITICAL)
+  const criticalErrors = computed(() =>
+    errors.value.filter((e) => e.severity === ErrorSeverity.CRITICAL)
   )
 
   const generateErrorId = (): string => {
@@ -61,7 +61,7 @@ export function useErrorHandler(): ErrorHandler {
 
   const categorizeError = (error: Error): ErrorCategory => {
     const message = error.message.toLowerCase()
-    
+
     if (message.includes('network') || message.includes('fetch')) {
       return ErrorCategory.NETWORK
     }
@@ -80,7 +80,7 @@ export function useErrorHandler(): ErrorHandler {
     if (message.includes('server') || message.includes('500')) {
       return ErrorCategory.SERVER
     }
-    
+
     return ErrorCategory.UNKNOWN
   }
 
@@ -118,14 +118,14 @@ export function useErrorHandler(): ErrorHandler {
         userAgent: navigator.userAgent,
         retryable: category === ErrorCategory.NETWORK,
         retryCount: 0,
-        ...context
+        ...context,
       }
     } else {
       errorContext = {
         ...error,
         id: error.id || generateErrorId(),
         timestamp: error.timestamp || new Date(),
-        ...context
+        ...context,
       }
     }
 
@@ -167,7 +167,7 @@ export function useErrorHandler(): ErrorHandler {
   }
 
   const clearError = (id: string) => {
-    const index = errors.value.findIndex(e => e.id === id)
+    const index = errors.value.findIndex((e) => e.id === id)
     if (index !== -1) {
       errors.value.splice(index, 1)
       retryCallbacks.delete(id)
@@ -175,7 +175,7 @@ export function useErrorHandler(): ErrorHandler {
   }
 
   const retry = async (id: string): Promise<void> => {
-    const error = errors.value.find(e => e.id === id)
+    const error = errors.value.find((e) => e.id === id)
     if (!error || !error.retryable) return
 
     const callback = retryCallbacks.get(id)
@@ -183,16 +183,16 @@ export function useErrorHandler(): ErrorHandler {
       try {
         // Increment retry count
         error.retryCount = (error.retryCount || 0) + 1
-        
+
         // Attempt retry
         await callback()
-        
+
         // Success - clear the error
         clearError(id)
-      } catch (retryError) {
+      } catch {
         // Update error with new failure
         error.timestamp = new Date()
-        
+
         // Disable retry after 3 attempts
         if ((error.retryCount || 0) >= 3) {
           error.retryable = false
@@ -203,14 +203,18 @@ export function useErrorHandler(): ErrorHandler {
   }
 
   const log = (error: ErrorContext) => {
-    const logLevel = error.severity === ErrorSeverity.CRITICAL ? 'error' : 
-                     error.severity === ErrorSeverity.HIGH ? 'warn' : 'info'
-    
+    const logLevel =
+      error.severity === ErrorSeverity.CRITICAL
+        ? 'error'
+        : error.severity === ErrorSeverity.HIGH
+          ? 'warn'
+          : 'info'
+
     console[logLevel](`[${error.category.toUpperCase()}] ${error.message}`, {
       id: error.id,
       severity: error.severity,
       timestamp: error.timestamp,
-      additional: error.additional
+      additional: error.additional,
     })
 
     // In development, also log the stack trace
@@ -218,7 +222,6 @@ export function useErrorHandler(): ErrorHandler {
       console.debug('Stack trace:', error.stack)
     }
   }
-
 
   return {
     handle,
@@ -228,7 +231,7 @@ export function useErrorHandler(): ErrorHandler {
     log,
     errors: computed(() => errors.value),
     hasErrors,
-    criticalErrors
+    criticalErrors,
   }
 }
 
@@ -241,7 +244,7 @@ export function setupGlobalErrorHandler() {
     handle(new Error(event.reason), {
       category: ErrorCategory.UNKNOWN,
       severity: ErrorSeverity.HIGH,
-      additional: { reason: event.reason }
+      additional: { reason: event.reason },
     })
     event.preventDefault()
   })
@@ -254,8 +257,8 @@ export function setupGlobalErrorHandler() {
       additional: {
         filename: event.filename,
         lineno: event.lineno,
-        colno: event.colno
-      }
+        colno: event.colno,
+      },
     })
     event.preventDefault()
   })

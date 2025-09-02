@@ -40,27 +40,29 @@ export default defineConfig({
         'es.object.to-string',
         'web.dom-collections.for-each',
         'esnext.global-this',
-        'esnext.string.match-all'
-      ]
+        'esnext.string.match-all',
+      ],
     }),
     // Gzip compression for production
-    ...(process.env.NODE_ENV === 'production' ? [
-      compression({
-        algorithm: 'gzip',
-        ext: '.gz',
-      }),
-      compression({
-        algorithm: 'brotliCompress',
-        ext: '.br',
-      }),
-      // Bundle analyzer
-      visualizer({
-        filename: 'dist/stats.html',
-        open: false,
-        gzipSize: true,
-        brotliSize: true,
-      })
-    ] : []),
+    ...(process.env.NODE_ENV === 'production'
+      ? [
+          compression({
+            algorithm: 'gzip',
+            ext: '.gz',
+          }),
+          compression({
+            algorithm: 'brotliCompress',
+            ext: '.br',
+          }),
+          // Bundle analyzer
+          visualizer({
+            filename: 'dist/stats.html',
+            open: false,
+            gzipSize: true,
+            brotliSize: true,
+          }),
+        ]
+      : []),
   ],
   resolve: {
     alias: {
@@ -108,22 +110,22 @@ export default defineConfig({
             if (id.includes('vue-i18n')) {
               return 'i18n-vendor'
             }
-            
+
             // Analytics and performance
             if (id.includes('web-vitals')) {
               return 'analytics-vendor'
             }
-            
+
             // Large libraries that should be separate
             if (id.includes('jspdf') || id.includes('html2canvas')) {
               return 'pdf-vendor'
             }
-            
+
             // Utility libraries
             if (id.includes('lodash') || id.includes('date-fns') || id.includes('uuid')) {
               return 'utils-vendor'
             }
-            
+
             // Everything else
             return 'vendor'
           }
@@ -149,7 +151,7 @@ export default defineConfig({
           if (id.includes('/composables/')) {
             return 'composables'
           }
-          
+
           // Utils chunk
           if (id.includes('/utils/')) {
             return 'utils'

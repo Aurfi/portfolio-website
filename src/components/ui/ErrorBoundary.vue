@@ -4,17 +4,11 @@
       <div class="error-icon">⚠️</div>
       <h2 class="error-title">{{ title }}</h2>
       <p class="error-message">{{ errorMessage }}</p>
-      
+
       <div class="error-actions">
-        <button @click="retry" class="retry-button" v-if="retryable">
-          Try Again
-        </button>
-        <button @click="reset" class="reset-button">
-          Reset
-        </button>
-        <button @click="goHome" class="home-button">
-          Go Home
-        </button>
+        <button @click="retry" class="retry-button" v-if="retryable">Try Again</button>
+        <button @click="reset" class="reset-button">Reset</button>
+        <button @click="goHome" class="home-button">Go Home</button>
       </div>
 
       <details v-if="showDetails" class="error-details">
@@ -29,7 +23,12 @@
 <script setup lang="ts">
 import { ref, onErrorCaptured, defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
-import { useErrorHandler, type ErrorContext, ErrorSeverity, ErrorCategory } from '@/composables/useErrorHandler'
+import {
+  useErrorHandler,
+  type ErrorContext,
+  ErrorSeverity,
+  ErrorCategory,
+} from '@/composables/useErrorHandler'
 
 interface Props {
   title?: string
@@ -42,7 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
   title: 'Something went wrong',
   fallback: true,
   retryable: true,
-  showDetails: import.meta.env.DEV
+  showDetails: import.meta.env.DEV,
 })
 
 const emit = defineEmits<{
@@ -71,8 +70,8 @@ onErrorCaptured((error: Error) => {
     severity: ErrorSeverity.HIGH,
     additional: {
       component: 'ErrorBoundary',
-      fallback: props.fallback
-    }
+      fallback: props.fallback,
+    },
   })
 
   emit('error', error)
@@ -124,7 +123,6 @@ const goHome = () => {
   background: var(--bg-primary);
   border-radius: 1rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-
 }
 
 .error-icon {
@@ -214,9 +212,16 @@ const goHome = () => {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  75% { transform: translateX(10px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
 }
 
 @media (max-width: 640px) {

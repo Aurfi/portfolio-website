@@ -75,7 +75,9 @@ export function usePerformanceOptimization() {
     // Get battery level if available
     if ('getBattery' in navigator) {
       try {
-        const navigatorWithBattery = navigator as Navigator & { getBattery(): Promise<{ level: number }> }
+        const navigatorWithBattery = navigator as Navigator & {
+          getBattery(): Promise<{ level: number }>
+        }
         const battery = await navigatorWithBattery.getBattery()
         metrics.value.batteryLevel = battery.level
       } catch {
@@ -279,7 +281,9 @@ export function usePerformanceOptimization() {
           if (typeof gtag !== 'undefined') {
             gtag('event', 'FID', {
               event_category: 'Web Vitals',
-              value: Math.round((entry as PerformanceEntryWithFID).processingStart - entry.startTime),
+              value: Math.round(
+                (entry as PerformanceEntryWithFID).processingStart - entry.startTime
+              ),
               custom_map: {
                 device_type: metrics.value.deviceType,
                 connection_type: metrics.value.connectionType,
