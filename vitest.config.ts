@@ -57,8 +57,10 @@ export default defineConfig({
       },
     },
     // Mock browser APIs
-    deps: {
-      inline: ['@vue', '@vueuse', 'vue-demi'],
+    server: {
+      deps: {
+        inline: ['@vue', '@vueuse', 'vue-demi'],
+      },
     },
   },
 })

@@ -21,7 +21,7 @@ describe('useTheme', () => {
     })
   })
 
-  it('initializes with auto theme by default', () => {
+  it('initializes with default theme by default', () => {
     let result: ReturnType<typeof useTheme> | undefined
 
     const component = {
@@ -29,10 +29,11 @@ describe('useTheme', () => {
         result = useTheme()
         return {}
       },
+      template: '<div></div>'
     }
 
     createApp(component).mount(document.createElement('div'))
-    expect(result?.currentTheme.value).toBe('auto')
+    expect(result?.currentTheme.value).toBe('default')
   })
 
   it('provides theme labels', () => {
@@ -43,13 +44,12 @@ describe('useTheme', () => {
         result = useTheme()
         return {}
       },
+      template: '<div></div>'
     }
 
     createApp(component).mount(document.createElement('div'))
     expect(result?.themeLabels.value).toEqual({
-      light: 'Light',
-      dark: 'Dark',
-      auto: 'Auto',
+      'default': 'Default',
       'high-contrast': 'High Contrast',
     })
   })
@@ -62,13 +62,12 @@ describe('useTheme', () => {
         result = useTheme()
         return {}
       },
+      template: '<div></div>'
     }
 
     createApp(component).mount(document.createElement('div'))
     expect(result?.themeIcons.value).toEqual({
-      light: '☀️',
-      dark: '🌙',
-      auto: '🔄',
+      'default': '🎨',
       'high-contrast': '⚡',
     })
   })
@@ -81,6 +80,7 @@ describe('useTheme', () => {
         result = useTheme()
         return {}
       },
+      template: '<div></div>'
     }
 
     createApp(component).mount(document.createElement('div'))
@@ -98,6 +98,7 @@ describe('useTheme', () => {
         result = useTheme()
         return {}
       },
+      template: '<div></div>'
     }
 
     createApp(component).mount(document.createElement('div'))
