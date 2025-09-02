@@ -180,4 +180,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Note:** This portfolio website was created with AI assistance to demonstrate modern web development practices and efficient project setup.
+**Note:** This portfolio website was created by an AI to demonstrate modern web development practices and efficient project setup.
