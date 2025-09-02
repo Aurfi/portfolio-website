@@ -79,6 +79,8 @@ interface Props {
 
 defineProps<Props>()
 
+// Set up i18n for template usage
+useI18n()
 
 // Skills to display
 const skills = computed(() => ['Vue.js', 'TypeScript', 'Node.js', 'Docker', 'Spring Boot'])

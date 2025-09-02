@@ -63,7 +63,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
 import PersonalLogo from '@/components/ui/PersonalLogo.vue'
