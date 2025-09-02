@@ -1,0 +1,95 @@
+{
+  "navigation": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "allProjects": "All Projects",
+    "toggleMenu": "Toggle navigation menu"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "John Developer",
+    "initials": "JD",
+    "subtitle": "Full-Stack Developer & Software Engineer passionate about creating exceptional digital experiences",
+    "viewWork": "View My Work",
+    "getInTouch": "Get In Touch",
+    "scrollDown": "Scroll down to explore"
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "subtitle": "Explore my collection of projects showcasing various technologies and skills",
+    "viewProject": "View Project",
+    "viewAll": "View All Projects",
+    "viewDemo": "View Demo",
+    "viewCode": "View Code",
+    "viewDetails": "View Details",
+    "backToProjects": "Back to Projects",
+    "duration": "Development Duration",
+    "complexity": "Complexity",
+    "completed": "Completed",
+    "technologies": "Technologies Used",
+    "highlights": "Key Highlights"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Passionate developer with a focus on creating innovative solutions",
+    "description1": "I'm a full-stack developer with over 5 years of experience building web applications and digital solutions. I specialize in modern JavaScript frameworks, backend development, and creating seamless user experiences.",
+    "description2": "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.",
+    "experience": "Professional Experience",
+    "downloadResume": "Download Resume",
+    "getInTouch": "Get In Touch"
+  },
+  "contact": {
+    "title": "Let's Work Together",
+    "subtitle": "Ready to bring your ideas to life? Let's discuss your next project or collaboration opportunity",
+    "email": "Email",
+    "emailDescription": "Drop me a line anytime",
+    "phone": "Phone",
+    "phoneDescription": "Available for calls during business hours",
+    "location": "Location",
+    "locationDescription": "Based in Your City, Available Worldwide",
+    "followMe": "Follow Me",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "your.email@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "What's this about?",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project or inquiry...",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": "Thank you for your message! I'll get back to you soon.",
+      "error": "Sorry, there was an error sending your message. Please try again.",
+      "errors": {
+        "nameRequired": "Name is required",
+        "nameMinLength": "Name must be at least 2 characters",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "subjectRequired": "Subject is required",
+        "messageRequired": "Message is required",
+        "messageMinLength": "Message must be at least 10 characters"
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "message": "The page you're looking for doesn't exist or has been moved.",
+    "goHome": "Go Home",
+    "viewProjects": "View Projects",
+    "helpfulLinks": "Helpful Links"
+  },
+  "footer": {
+    "contact": "Contact",
+    "selectLanguage": "Select Language"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "close": "Close",
+    "success": "Success",
+    "warning": "Warning"
+  }
+}
