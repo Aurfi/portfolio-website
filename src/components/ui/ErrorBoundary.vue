@@ -25,7 +25,6 @@ import { ref, onErrorCaptured, defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   useErrorHandler,
-  type ErrorContext,
   ErrorSeverity,
   ErrorCategory,
 } from '@/composables/useErrorHandler'

@@ -79,7 +79,6 @@ interface Props {
 
 defineProps<Props>()
 
-const { t } = useI18n()
 
 // Skills to display
 const skills = computed(() => ['Vue.js', 'TypeScript', 'Node.js', 'Docker', 'Spring Boot'])

@@ -82,8 +82,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useScrollNavigation, type NavigationSection } from '@/composables/useScrollNavigation'
 
 interface ExternalLink {
@@ -102,7 +102,6 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const route = useRoute()
-const router = useRouter()
 
 const isMobileMenuOpen = ref(false)
 const isScrolled = ref(false)

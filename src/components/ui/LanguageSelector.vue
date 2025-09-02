@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import type { SupportedLocale } from '@/types'
 
@@ -78,7 +78,7 @@ interface Props {
   size?: 'small' | 'medium' | 'large'
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   useDropdown: false,
   size: 'medium',
 })

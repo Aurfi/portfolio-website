@@ -83,7 +83,7 @@ interface Props {
   showLabel?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   variant: 'simple',
   showLabel: false,
 })

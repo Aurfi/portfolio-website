@@ -24,7 +24,7 @@ useScrollReveal()
 useTheme()
 
 // Initialize PWA functionality
-const { state: pwaState } = usePWA()
+usePWA()
 
 // Initialize Web Vitals monitoring
 useWebVitals()

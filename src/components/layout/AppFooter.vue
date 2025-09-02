@@ -72,8 +72,6 @@ import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 
 const { t } = useI18n()
 
-// Current year for copyright
-const currentYear = computed(() => new Date().getFullYear())
 </script>
 
 <style lang="scss" scoped>

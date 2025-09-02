@@ -82,7 +82,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { projects, projectCategories, getProjectsByCategory } from '@/data/projects'
+import { projectCategories, getProjectsByCategory } from '@/data/projects'
 import type { Project } from '@/types'
 import ProjectCard from './ProjectCard.vue'
 import ProjectDetailModal from './ProjectDetailModal.vue'

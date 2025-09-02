@@ -88,11 +88,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import type { Project } from '@/types'
 
 const route = useRoute()
-const router = useRouter()
 
 const project = ref<Project | null>(null)
 const loading = ref(true)

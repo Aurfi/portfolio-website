@@ -139,7 +139,7 @@ const handleSPAFallback = () => {
 handleSPAFallback()
 
 // Global navigation guards
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   // Set document title based on route meta
   if (to.meta.title) {
     const title = i18n.global.t(to.meta.title as string)
