@@ -19,7 +19,7 @@ export interface Project {
   featured: boolean
   completionDate: Date
   developmentDuration: string // e.g., "3 months"
-  highlights: LocalizedString[]
+  highlights: { [languageCode: string]: string[] }
   complexity: ProjectComplexity
 }
 

@@ -29,7 +29,21 @@
     "complexity": "Complexity",
     "completed": "Completed",
     "technologies": "Technologies Used",
-    "highlights": "Key Highlights"
+    "highlights": "Key Highlights",
+    "filterBy": "Filter by Category",
+    "projectsFound": "projects found",
+    "noProjectsFound": "No projects found",
+    "tryDifferentFilter": "Try selecting a different category to see more projects.",
+    "showAllProjects": "Show All Projects",
+    "featured": "Featured",
+    "integrated": "Integrated",
+    "external": "External",
+    "linesOfCode": "Lines of Code",
+    "moreFeatures": "more features",
+    "about": "About This Project",
+    "keyIndicators": "Key Technical Indicators",
+    "teamSize": "Team Size",
+    "developer": "developer | developers"
   },
   "about": {
     "title": "About Me",
@@ -37,6 +51,7 @@
     "description1": "I am a full-stack developer with over 5 years of experience building web applications and digital solutions. I specialize in modern JavaScript frameworks, backend development, and creating seamless user experiences.",
     "description2": "When I am not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.",
     "experience": "Professional Experience",
+    "testimonials": "What People Say",
     "downloadResume": "Download Resume",
     "getInTouch": "Get In Touch"
   },
@@ -97,6 +112,48 @@
     "error": "An error occurred",
     "close": "Close",
     "success": "Success",
-    "warning": "Warning"
+    "warning": "Warning",
+    "errorBoundary": {
+      "title": "Something went wrong",
+      "message": "We encountered an unexpected error. Please try refreshing the page or return to the homepage.",
+      "retry": "Try Again",
+      "goHome": "Go to Homepage",
+      "technicalDetails": "Technical Details"
+    }
+  },
+  "accessibility": {
+    "skipToMain": "Skip to main content",
+    "skipToNavigation": "Skip to navigation",
+    "openInNewTab": "Opens in new tab",
+    "menuExpanded": "Menu expanded",
+    "menuCollapsed": "Menu collapsed",
+    "currentPage": "Current page",
+    "loading": "Content is loading",
+    "imageAlt": "Image of {title}",
+    "screenReader": {
+      "navigationLandmark": "Main navigation",
+      "contentLandmark": "Main content",
+      "complementaryLandmark": "Complementary content",
+      "searchLandmark": "Search",
+      "formLandmark": "Contact form"
+    }
+  },
+  "pwa": {
+    "install": {
+      "title": "Install Portfolio App",
+      "description": "Add this portfolio to your home screen for quick access and offline viewing.",
+      "install": "Install",
+      "dismiss": "Not Now"
+    },
+    "update": {
+      "title": "Update Available",
+      "description": "A new version of the portfolio is available.",
+      "update": "Update Now",
+      "dismiss": "Later"
+    },
+    "offline": {
+      "title": "You're Offline",
+      "description": "Some features may be limited while offline."
+    }
   }
 }

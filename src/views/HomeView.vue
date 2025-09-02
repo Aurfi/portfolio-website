@@ -63,11 +63,11 @@ onMounted(() => {
 :global(.section) {
   min-height: 100vh;
   padding: $spacing-xl 0;
-  
+
   &:first-child {
     padding-top: 0;
   }
-  
+
   .container {
     width: 100%;
     max-width: 1200px;
@@ -87,11 +87,11 @@ onMounted(() => {
   .main-content {
     padding-top: 70px;
   }
-  
+
   :global(html) {
     scroll-padding-top: 70px;
   }
-  
+
   :global(.section) {
     min-height: auto;
     padding: $spacing-lg 0;

@@ -72,11 +72,11 @@
             </div>
           </section>
 
-          <section v-if="project.highlights.length" class="highlights">
+          <section v-if="project.highlights.en.length" class="highlights">
             <h3>{{ $t('projects.highlights') }}</h3>
             <ul>
-              <li v-for="highlight in project.highlights" :key="highlight.en">
-                {{ highlight.en }}
+              <li v-for="(highlight, index) in project.highlights.en" :key="index">
+                {{ highlight }}
               </li>
             </ul>
           </section>
@@ -138,11 +138,13 @@ const loadProject = async () => {
         featured: true,
         completionDate: new Date(),
         developmentDuration: '3 months',
-        highlights: [
-          { en: 'Modern Vue.js 3 architecture' },
-          { en: 'Full TypeScript implementation' },
-          { en: 'Responsive design' },
-        ],
+        highlights: {
+          en: [
+            'Modern Vue.js 3 architecture',
+            'Full TypeScript implementation',
+            'Responsive design',
+          ],
+        },
         complexity: {
           level: 'intermediate',
           indicators: ['TypeScript', 'Vue 3', 'SCSS'],

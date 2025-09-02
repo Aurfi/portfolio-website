@@ -20,7 +20,7 @@ export function useScrollNavigation(sections: NavigationSection[]) {
     // Use native smooth scrolling - simple and reliable
     element.scrollIntoView({
       behavior: 'smooth',
-      block: 'start'
+      block: 'start',
     })
   }
 
@@ -43,7 +43,7 @@ export function useScrollNavigation(sections: NavigationSection[]) {
     observer.value = new IntersectionObserver(handleIntersection, {
       root: null,
       rootMargin: '-20% 0px -20% 0px',
-      threshold: [0.5]
+      threshold: [0.5],
     })
 
     // Observe sections
@@ -66,7 +66,7 @@ export function useScrollNavigation(sections: NavigationSection[]) {
   onMounted(() => {
     // Set initial active section from URL hash
     const hash = route.hash.slice(1)
-    if (hash && sections.some(s => s.id === hash)) {
+    if (hash && sections.some((s) => s.id === hash)) {
       activeSection.value = hash
     } else if (sections.length > 0) {
       activeSection.value = sections[0].id
@@ -83,6 +83,6 @@ export function useScrollNavigation(sections: NavigationSection[]) {
     activeSection,
     scrollToSection,
     initializeObserver,
-    cleanup
+    cleanup,
   }
 }

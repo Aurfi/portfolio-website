@@ -111,16 +111,20 @@
   }
 }
 
-// Card Mixins
+// Card Mixins - Apple-like subtle shadows
 @mixin card {
   background: $background-color;
   border-radius: $border-radius-lg;
-  box-shadow: $shadow-md;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04);
   padding: $spacing-lg;
-  transition: box-shadow $transition-normal;
+  transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   &:hover {
-    box-shadow: $shadow-lg;
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.06);
   }
 }
 

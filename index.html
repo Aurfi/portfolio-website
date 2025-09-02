@@ -1,13 +1,123 @@
 <!doctype html>
-<html lang="">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Portfolio Website</title>
+    <meta name="title" content="Portfolio Website" />
+    <meta
+      name="description"
+      content="Professional portfolio showcasing web development projects and skills"
+    />
+    <meta
+      name="keywords"
+      content="portfolio, web development, vue.js, javascript, frontend, fullstack"
+    />
+    <meta name="author" content="Portfolio Owner" />
+
+    <!-- Security Headers -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://api.github.com; frame-ancestors 'none';"
+    />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="background-color" content="#ffffff" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aurfi.github.io/portfolio-website/" />
+
+    <!-- Apple PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Portfolio" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.svg" />
+
+    <!-- Microsoft PWA Meta Tags -->
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.svg" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/" />
+    <meta property="og:title" content="Portfolio Website" />
+    <meta
+      property="og:description"
+      content="Professional portfolio showcasing web development projects and skills"
+    />
+    <meta property="og:image" content="/screenshots/desktop-home.svg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://yourdomain.com/" />
+    <meta property="twitter:title" content="Portfolio Website" />
+    <meta
+      property="twitter:description"
+      content="Professional portfolio showcasing web development projects and skills"
+    />
+    <meta property="twitter:image" content="/screenshots/desktop-home.svg" />
+
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.github.com" />
+
+    <!-- Google Analytics (replace GA_MEASUREMENT_ID with your actual ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      gtag('config', 'GA_MEASUREMENT_ID', {
+        page_title: document.title,
+        page_location: window.location.href,
+      })
+    </script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Portfolio Owner",
+        "jobTitle": "Web Developer",
+        "url": "https://yourdomain.com",
+        "sameAs": ["https://github.com/yourusername", "https://linkedin.com/in/yourusername"],
+        "knowsAbout": [
+          "Web Development",
+          "JavaScript",
+          "Vue.js",
+          "TypeScript",
+          "Frontend Development"
+        ]
+      }
+    </script>
   </head>
   <body>
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif">
+        <h1>JavaScript Required</h1>
+        <p>This portfolio website requires JavaScript to function properly.</p>
+        <p>Please enable JavaScript in your browser settings and reload the page.</p>
+      </div>
+    </noscript>
+
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
+
+    <!-- PWA Install Prompt (will be handled by JavaScript) -->
+    <div id="pwa-install-prompt" style="display: none"></div>
   </body>
 </html>

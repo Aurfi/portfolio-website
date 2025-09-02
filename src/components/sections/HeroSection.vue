@@ -3,43 +3,53 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-text">
-          <h1 class="hero-title">
+          <h1 class="hero-title animate-fade-in-up">
             <span class="greeting">{{ $t('hero.greeting') }}</span>
-            <span class="name">{{ $t('hero.name') }}</span>
+            <span class="name gradient-text">{{ $t('hero.name') }}</span>
           </h1>
 
-          <p class="hero-subtitle">
+          <p class="hero-subtitle animate-fade-in-up animate-delay-200">
             {{ $t('hero.subtitle') }}
           </p>
 
-          <div class="hero-skills">
-            <span v-for="skill in skills" :key="skill" class="skill-tag">
+          <div class="hero-skills animate-fade-in-up animate-delay-300">
+            <span
+              v-for="(skill, index) in skills"
+              :key="skill"
+              class="skill-tag hover-scale"
+              :style="{ animationDelay: `${0.4 + index * 0.1}s` }"
+            >
               {{ skill }}
             </span>
           </div>
 
-          <div class="hero-actions">
-            <button class="cta-button primary" @click="scrollToProjects">
+          <div class="hero-actions animate-fade-in-up animate-delay-500">
+            <button class="cta-button primary hover-lift interactive" @click="scrollToProjects">
               {{ $t('hero.viewWork') }}
             </button>
 
-            <button class="cta-button secondary" @click="scrollToContact">
+            <button class="cta-button secondary hover-lift interactive" @click="scrollToContact">
               {{ $t('hero.getInTouch') }}
             </button>
           </div>
         </div>
 
-        <div class="hero-visual">
+        <div class="hero-visual animate-fade-in animate-delay-300">
           <div class="profile-container">
-            <div class="profile-image">
+            <div class="profile-image hover-glow">
               <!-- Placeholder for profile image -->
-              <div class="image-placeholder">
-                <span class="initials">{{ $t('hero.initials') }}</span>
+              <div class="image-placeholder glass">
+                <PersonalLogo variant="icon" size="xl" />
               </div>
             </div>
 
             <div class="floating-elements">
-              <div class="floating-element" v-for="n in 6" :key="n"></div>
+              <div
+                class="floating-element animate-float"
+                v-for="n in 6"
+                :key="n"
+                :style="{ animationDelay: `${n * 0.5}s` }"
+              ></div>
             </div>
           </div>
         </div>
@@ -61,6 +71,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import PersonalLogo from '@/components/ui/PersonalLogo.vue'
 
 interface Props {
   id: string
@@ -106,7 +117,7 @@ const scrollToNext = () => {
     rgba($secondary-color, 0.05) 100%
   );
   overflow: hidden;
-  
+
   .container {
     width: 100%;
     max-width: 1200px;

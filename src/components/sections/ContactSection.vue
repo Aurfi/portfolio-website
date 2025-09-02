@@ -1,10 +1,10 @@
 <template>
-  <section class="contact-section section" :id="id">
+  <section class="contact-section section" :id="id" aria-labelledby="contact-title">
     <div class="container">
       <div class="contact-content">
         <div class="contact-info">
           <div class="section-header">
-            <h2 class="section-title">{{ $t('contact.title') }}</h2>
+            <h2 id="contact-title" class="section-title">{{ $t('contact.title') }}</h2>
             <p class="section-subtitle">{{ $t('contact.subtitle') }}</p>
           </div>
 
@@ -71,7 +71,14 @@
         </div>
 
         <div class="contact-form-container">
-          <form class="contact-form" @submit.prevent="submitForm">
+          <form
+            class="contact-form"
+            @submit.prevent="submitForm"
+            role="form"
+            aria-labelledby="contact-form-title"
+            novalidate
+          >
+            <h3 id="contact-form-title" class="sr-only">Contact Form</h3>
             <div class="form-group">
               <label for="name" class="form-label">{{ $t('contact.form.name') }}</label>
               <input
@@ -81,9 +88,14 @@
                 class="form-input"
                 :class="{ error: errors.name }"
                 :placeholder="$t('contact.form.namePlaceholder')"
+                :aria-describedby="errors.name ? 'name-error' : undefined"
+                :aria-invalid="!!errors.name"
                 required
+                autocomplete="name"
               />
-              <span v-if="errors.name" class="error-message">{{ errors.name }}</span>
+              <span v-if="errors.name" id="name-error" class="error-message" role="alert">{{
+                errors.name
+              }}</span>
             </div>
 
             <div class="form-group">
@@ -95,9 +107,14 @@
                 class="form-input"
                 :class="{ error: errors.email }"
                 :placeholder="$t('contact.form.emailPlaceholder')"
+                :aria-describedby="errors.email ? 'email-error' : undefined"
+                :aria-invalid="!!errors.email"
                 required
+                autocomplete="email"
               />
-              <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
+              <span v-if="errors.email" id="email-error" class="error-message" role="alert">{{
+                errors.email
+              }}</span>
             </div>
 
             <div class="form-group">
@@ -109,9 +126,14 @@
                 class="form-input"
                 :class="{ error: errors.subject }"
                 :placeholder="$t('contact.form.subjectPlaceholder')"
+                :aria-describedby="errors.subject ? 'subject-error' : undefined"
+                :aria-invalid="!!errors.subject"
                 required
+                autocomplete="off"
               />
-              <span v-if="errors.subject" class="error-message">{{ errors.subject }}</span>
+              <span v-if="errors.subject" id="subject-error" class="error-message" role="alert">{{
+                errors.subject
+              }}</span>
             </div>
 
             <div class="form-group">
@@ -122,10 +144,15 @@
                 class="form-textarea"
                 :class="{ error: errors.message }"
                 :placeholder="$t('contact.form.messagePlaceholder')"
+                :aria-describedby="errors.message ? 'message-error' : undefined"
+                :aria-invalid="!!errors.message"
                 rows="5"
                 required
+                autocomplete="off"
               ></textarea>
-              <span v-if="errors.message" class="error-message">{{ errors.message }}</span>
+              <span v-if="errors.message" id="message-error" class="error-message" role="alert">{{
+                errors.message
+              }}</span>
             </div>
 
             <!-- Honeypot field for spam protection -->
@@ -135,6 +162,7 @@
               class="honeypot"
               tabindex="-1"
               autocomplete="off"
+              aria-hidden="true"
             />
 
             <button
@@ -162,8 +190,14 @@
           </form>
 
           <!-- Success/Error Messages -->
-          <div v-if="submitStatus" class="submit-status" :class="submitStatus.type">
-            <div class="status-icon">
+          <div
+            v-if="submitStatus"
+            class="submit-status"
+            :class="submitStatus.type"
+            role="alert"
+            aria-live="polite"
+          >
+            <div class="status-icon" aria-hidden="true">
               <svg
                 v-if="submitStatus.type === 'success'"
                 viewBox="0 0 24 24"
@@ -189,6 +223,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useAccessibility } from '@/composables/useAccessibility'
 
 interface Props {
   id: string
@@ -197,6 +232,7 @@ interface Props {
 defineProps<Props>()
 
 const { t } = useI18n()
+const { announce } = useAccessibility()
 
 // Form data
 const form = reactive({
@@ -246,13 +282,16 @@ const validateForm = () => {
   })
 
   let isValid = true
+  const errorMessages: string[] = []
 
   // Name validation
   if (!form.name.trim()) {
     errors.name = t('contact.form.errors.nameRequired')
+    errorMessages.push('Name is required')
     isValid = false
   } else if (form.name.trim().length < 2) {
     errors.name = t('contact.form.errors.nameMinLength')
+    errorMessages.push('Name must be at least 2 characters')
     isValid = false
   }
 
@@ -260,25 +299,39 @@ const validateForm = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!form.email.trim()) {
     errors.email = t('contact.form.errors.emailRequired')
+    errorMessages.push('Email is required')
     isValid = false
   } else if (!emailRegex.test(form.email)) {
     errors.email = t('contact.form.errors.emailInvalid')
+    errorMessages.push('Please enter a valid email address')
     isValid = false
   }
 
   // Subject validation
   if (!form.subject.trim()) {
     errors.subject = t('contact.form.errors.subjectRequired')
+    errorMessages.push('Subject is required')
     isValid = false
   }
 
   // Message validation
   if (!form.message.trim()) {
     errors.message = t('contact.form.errors.messageRequired')
+    errorMessages.push('Message is required')
     isValid = false
   } else if (form.message.trim().length < 10) {
     errors.message = t('contact.form.errors.messageMinLength')
+    errorMessages.push('Message must be at least 10 characters')
     isValid = false
+  }
+
+  // Announce validation errors to screen readers
+  if (!isValid) {
+    const errorCount = errorMessages.length
+    announce(
+      `Form has ${errorCount} error${errorCount > 1 ? 's' : ''}. ${errorMessages.join('. ')}`,
+      'assertive'
+    )
   }
 
   return isValid
@@ -309,6 +362,9 @@ const submitForm = async () => {
       message: t('contact.form.success'),
     }
 
+    // Announce success to screen readers
+    announce('Message sent successfully! I will get back to you soon.', 'polite')
+
     // Reset form
     Object.keys(form).forEach((key) => {
       form[key as keyof typeof form] = ''
@@ -318,6 +374,9 @@ const submitForm = async () => {
       type: 'error',
       message: t('contact.form.error'),
     }
+
+    // Announce error to screen readers
+    announce('There was an error sending your message. Please try again.', 'assertive')
   } finally {
     isSubmitting.value = false
 

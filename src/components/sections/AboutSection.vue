@@ -28,12 +28,32 @@
           </div>
 
           <div class="about-actions">
-            <button class="download-resume-button" @click="downloadResume">
-              {{ $t('about.downloadResume') }}
-              <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <button
+              class="download-resume-button"
+              @click="downloadResume"
+              :disabled="isGeneratingResume"
+            >
+              {{ isGeneratingResume ? 'Generating...' : $t('about.downloadResume') }}
+              <svg
+                v-if="!isGeneratingResume"
+                class="download-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7,10 12,15 17,10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <svg
+                v-else
+                class="loading-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
               </svg>
             </button>
 
@@ -68,12 +88,34 @@
           </div>
         </div>
       </div>
+
+      <!-- Testimonials Section -->
+      <div class="testimonials-section">
+        <div class="container">
+          <h3 class="testimonials-title">{{ $t('about.testimonials') }}</h3>
+          <div class="testimonials-grid">
+            <div v-for="testimonial in testimonials" :key="testimonial.id" class="testimonial-card">
+              <div class="testimonial-content">
+                <p class="testimonial-text">"{{ testimonial.content }}"</p>
+              </div>
+              <div class="testimonial-author">
+                <div class="author-avatar">{{ testimonial.avatar }}</div>
+                <div class="author-info">
+                  <div class="author-name">{{ testimonial.name }}</div>
+                  <div class="author-role">{{ testimonial.role }}, {{ testimonial.company }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { useResumeGenerator } from '@/composables/useResumeGenerator'
 
 interface Props {
   id: string
@@ -148,10 +190,53 @@ const stats = computed(() => [
   { value: '100%', label: 'Client Satisfaction' },
 ])
 
+// Testimonials
+const testimonials = computed(() => [
+  {
+    id: 1,
+    name: 'Sarah Johnson',
+    role: 'Product Manager',
+    company: 'Tech Solutions Inc.',
+    content:
+      'John is an exceptional developer who consistently delivers high-quality work. His attention to detail and problem-solving skills are outstanding.',
+    avatar: '👩‍💼',
+  },
+  {
+    id: 2,
+    name: 'Michael Chen',
+    role: 'CTO',
+    company: 'Digital Agency Co.',
+    content:
+      'Working with John was a pleasure. He brought innovative solutions to complex problems and always met our deadlines.',
+    avatar: '👨‍💻',
+  },
+  {
+    id: 3,
+    name: 'Emily Rodriguez',
+    role: 'Design Lead',
+    company: 'Creative Studio',
+    content:
+      'John has an excellent eye for design implementation. He translated our designs into pixel-perfect, responsive interfaces.',
+    avatar: '👩‍🎨',
+  },
+])
+
+// Resume generation
+const { generateResumePDF, getDefaultResumeData } = useResumeGenerator()
+const isGeneratingResume = ref(false)
+
 // Actions
-const downloadResume = () => {
-  // TODO: Implement resume download
-  console.log('Downloading resume...')
+const downloadResume = async () => {
+  try {
+    isGeneratingResume.value = true
+    const resumeData = getDefaultResumeData()
+    await generateResumePDF(resumeData)
+  } catch (error) {
+    console.error('Failed to generate resume:', error)
+    // You could add a toast notification here
+  } finally {
+    isGeneratingResume.value = false
+  }
 }
 
 const scrollToContact = () => {
@@ -292,10 +377,16 @@ const scrollToContact = () => {
   color: white;
   border-color: $primary-color;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: color.scale($primary-color, $lightness: -41.1290322581%);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba($primary-color, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
   }
 }
 
@@ -311,9 +402,23 @@ const scrollToContact = () => {
   }
 }
 
-.download-icon {
+.download-icon,
+.loading-icon {
   width: 18px;
   height: 18px;
+}
+
+.loading-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .about-visual {
@@ -428,6 +533,92 @@ const scrollToContact = () => {
     font-size: $font-size-sm;
     color: $text-color-light;
     font-weight: 500;
+  }
+}
+
+// Testimonials Section
+.testimonials-section {
+  padding: $spacing-xxl 0;
+  background: rgba($primary-color, 0.02);
+  margin-top: $spacing-xxl;
+}
+
+.testimonials-title {
+  font-size: $font-size-xl;
+  font-weight: 600;
+  color: $text-color;
+  text-align: center;
+  margin-bottom: $spacing-xl;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.testimonial-card {
+  background: white;
+  padding: $spacing-lg;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba($primary-color, 0.1);
+  transition: all $transition-normal;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.testimonial-content {
+  margin-bottom: $spacing-md;
+}
+
+.testimonial-text {
+  font-style: italic;
+  color: $text-color-light;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba($primary-color, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.author-info {
+  .author-name {
+    font-weight: 600;
+    color: $text-color;
+    font-size: $font-size-sm;
+    margin-bottom: 2px;
+  }
+
+  .author-role {
+    font-size: $font-size-xs;
+    color: $text-color-light;
   }
 }
 

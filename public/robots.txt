@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aurfi.github.io/portfolio-website/sitemap.xml
+
+# Disallow crawling of development files
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /dist/
+Disallow: /*.json
+Disallow: /*.config.*
+
+# Allow crawling of assets
+Allow: /assets/
+Allow: /images/
+Allow: /icons/
+Allow: /manifest.json

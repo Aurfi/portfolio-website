@@ -1,0 +1,134 @@
+@use './variables.scss' as *;
+
+// CSS Custom Properties for Dynamic Theming
+:root {
+  // Brand Colors
+  --color-primary: #{$primary-color};
+  --color-primary-light: #{$primary-light};
+  --color-primary-dark: #{$primary-dark};
+  --color-secondary: #{$secondary-color};
+  --color-secondary-light: #{$secondary-light};
+  --color-secondary-dark: #{$secondary-dark};
+  --color-accent: #{$accent-color};
+  --color-accent-light: #{$accent-light};
+  --color-accent-dark: #{$accent-dark};
+
+  // Text Colors
+  --color-text: #{$text-color};
+  --color-text-light: #{$text-color-light};
+  --color-text-muted: #{$text-color-muted};
+
+  // Background Colors
+  --color-background: #{$background-color};
+  --color-background-light: #{$background-light};
+  --color-background-gray: #{$background-gray};
+  --color-background-dark: #{$background-dark};
+
+  // Border Colors
+  --color-border: #{$border-color};
+  --color-border-light: #{$border-light};
+  --color-border-dark: #{$border-dark};
+
+  // Status Colors
+  --color-success: #{$success-color};
+  --color-error: #{$error-color};
+  --color-warning: #{$warning-color};
+  --color-info: #{$info-color};
+
+  // Glass-morphism
+  --glass-bg: #{$glass-bg};
+  --glass-border: #{$glass-border};
+  --glass-shadow: #{$glass-shadow};
+
+  // Spacing Scale
+  --spacing-xs: #{$spacing-xs};
+  --spacing-sm: #{$spacing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-xxl: #{$spacing-xxl};
+  --spacing-xxxl: #{$spacing-xxxl};
+
+  // Typography Scale
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-base: #{$font-size-base};
+  --font-size-md: #{$font-size-md};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-xxl: #{$font-size-xxl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
+
+  // Border Radius
+  --radius-sm: #{$border-radius-sm};
+  --radius-md: #{$border-radius-md};
+  --radius-lg: #{$border-radius-lg};
+  --radius-xl: #{$border-radius-xl};
+  --radius-full: #{$border-radius-full};
+
+  // Shadows
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+
+  // Transitions
+  --transition-fast: #{$transition-fast};
+  --transition-normal: #{$transition-normal};
+  --transition-slow: #{$transition-slow};
+  --ease-out-quart: #{$ease-out-quart};
+  --ease-in-quart: #{$ease-in-quart};
+  --ease-in-out-quart: #{$ease-in-out-quart};
+}
+
+// Dark Theme
+[data-theme='dark'] {
+  --color-text: #f9fafb;
+  --color-text-light: #d1d5db;
+  --color-text-muted: #9ca3af;
+  --color-background: #111827;
+  --color-background-light: #1f2937;
+  --color-background-gray: #374151;
+  --color-border: #374151;
+  --color-border-light: #4b5563;
+  --color-border-dark: #6b7280;
+  --glass-bg: rgba(31, 41, 55, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+// High Contrast Theme (Accessibility)
+[data-theme='high-contrast'] {
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-text: #000000;
+  --color-text-light: #000000;
+  --color-background: #ffffff;
+  --color-border: #000000;
+}
+
+// Reduced Motion (Accessibility)
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0.01ms;
+    --transition-normal: 0.01ms;
+    --transition-slow: 0.01ms;
+  }
+}
+
+// Color Scheme Preference
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-text: #f9fafb;
+    --color-text-light: #d1d5db;
+    --color-text-muted: #9ca3af;
+    --color-background: #111827;
+    --color-background-light: #1f2937;
+    --color-background-gray: #374151;
+    --color-border: #374151;
+    --color-border-light: #4b5563;
+    --color-border-dark: #6b7280;
+    --glass-bg: rgba(31, 41, 55, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+}

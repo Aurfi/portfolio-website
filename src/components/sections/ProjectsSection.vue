@@ -88,7 +88,15 @@ const featuredProjects = computed(() => [
   },
 ])
 
-const viewProject = (project: any) => {
+interface Project {
+  id: string
+  title: string
+  description: string
+  image: string
+  technologies: string[]
+}
+
+const viewProject = (project: Project) => {
   router.push(`/projects/${project.id}`)
 }
 </script>
@@ -101,7 +109,7 @@ const viewProject = (project: any) => {
 .projects-section {
   background: rgba($background-color, 0.5);
   padding: $spacing-xxl 0;
-  
+
   .container {
     width: 100%;
     max-width: 1200px;
@@ -149,20 +157,20 @@ const viewProject = (project: any) => {
   background: white;
   border-radius: $border-radius-lg;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all $transition-normal;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   cursor: pointer;
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 
     .project-overlay {
       opacity: 1;
     }
 
     .project-image img {
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
   }
 }
@@ -176,7 +184,7 @@ const viewProject = (project: any) => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform $transition-normal;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 }
 
@@ -205,8 +213,8 @@ const viewProject = (project: any) => {
   transition: all $transition-normal;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   }
 }
 
@@ -262,11 +270,11 @@ const viewProject = (project: any) => {
 
   &:hover {
     background: color.adjust($primary-color, $lightness: -10%);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba($primary-color, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.2);
 
     .arrow-icon {
-      transform: translateX(4px);
+      transform: translateX(2px);
     }
   }
 }

@@ -1,16 +1,41 @@
-// Color Variables
-$primary-color: #2c3e50;
-$secondary-color: #3498db;
-$accent-color: #e74c3c;
-$text-color: #2c3e50;
-$text-color-light: #7f8c8d;
-$text-light: #7f8c8d; // Backward compatibility
+// Modern Brand Color Palette
+$primary-color: #1e40af; // Professional blue
+$primary-light: #3b82f6;
+$primary-dark: #1e3a8a;
+$secondary-color: #06b6d4; // Cyan accent
+$secondary-light: #22d3ee;
+$secondary-dark: #0891b2;
+$accent-color: #f59e0b; // Warm amber
+$accent-light: #fbbf24;
+$accent-dark: #d97706;
+
+// Text Colors
+$text-color: #1f2937; // Dark gray
+$text-color-light: #6b7280; // Medium gray
+$text-light: #6b7280; // Backward compatibility
+$text-color-muted: #9ca3af; // Light gray
+
+// Background Colors
 $background-color: #ffffff;
-$background-light: #f8f9fa;
-$border-color: #e9ecef;
-$success-color: #27ae60;
-$error-color: #e74c3c;
-$warning-color: #f39c12;
+$background-light: #f9fafb;
+$background-gray: #f3f4f6;
+$background-dark: #111827;
+
+// Border Colors
+$border-color: #e5e7eb;
+$border-light: #f3f4f6;
+$border-dark: #d1d5db;
+
+// Status Colors
+$success-color: #10b981; // Emerald
+$error-color: #ef4444; // Red
+$warning-color: #f59e0b; // Amber
+$info-color: #3b82f6; // Blue
+
+// Glass-morphism Colors
+$glass-bg: rgba(255, 255, 255, 0.8);
+$glass-border: rgba(255, 255, 255, 0.2);
+$glass-shadow: rgba(0, 0, 0, 0.1);
 
 // Typography
 $font-family-primary:
@@ -77,3 +102,17 @@ $border-radius-full: 9999px;
 $transition-fast: 0.15s ease-in-out;
 $transition-normal: 0.3s ease-in-out;
 $transition-slow: 0.5s ease-in-out;
+
+// Apple-like Cubic Bezier Curves
+$ease-out-quart: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$ease-in-quart: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+$ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+
+// Z-index Scale
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;

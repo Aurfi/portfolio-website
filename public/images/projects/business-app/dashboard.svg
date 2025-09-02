@@ -1,0 +1,30 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="600" height="60" fill="rgba(255,255,255,0.1)"/>
+  <text x="20" y="35" fill="white" font-family="Arial, sans-serif" font-size="18" font-weight="bold">Business Dashboard</text>
+  
+  <!-- Sidebar -->
+  <rect x="0" y="60" width="150" height="340" fill="rgba(0,0,0,0.2)"/>
+  <rect x="20" y="80" width="110" height="30" rx="5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="20" y="120" width="110" height="30" rx="5" fill="rgba(255,255,255,0.05)"/>
+  <rect x="20" y="160" width="110" height="30" rx="5" fill="rgba(255,255,255,0.05)"/>
+  
+  <!-- Main Content -->
+  <rect x="170" y="80" width="200" height="120" rx="8" fill="rgba(255,255,255,0.9)"/>
+  <rect x="390" y="80" width="190" height="120" rx="8" fill="rgba(255,255,255,0.9)"/>
+  <rect x="170" y="220" width="410" height="160" rx="8" fill="rgba(255,255,255,0.9)"/>
+  
+  <!-- Charts placeholder -->
+  <circle cx="270" cy="140" r="30" fill="#27ae60" opacity="0.7"/>
+  <rect x="410" y="110" width="150" height="60" fill="#e74c3c" opacity="0.7" rx="4"/>
+  
+  <text x="300" y="250" fill="#2c3e50" font-family="Arial, sans-serif" font-size="16" font-weight="bold">Analytics & Reports</text>
+</svg>

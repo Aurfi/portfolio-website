@@ -5,11 +5,16 @@
         <div class="nav-content">
           <!-- Logo/Brand -->
           <router-link to="/" class="brand">
-            <span class="brand-text">Portfolio</span>
+            <PersonalLogo
+              variant="combined"
+              size="sm"
+              :show-full-name="true"
+              :show-tagline="false"
+            />
           </router-link>
 
           <!-- Desktop Navigation -->
-          <div class="nav-links desktop-nav">
+          <nav class="nav-links desktop-nav" aria-label="Main navigation">
             <router-link
               v-for="item in navigationItems"
               :key="item.name"
@@ -19,6 +24,11 @@
             >
               {{ $t(item.translationKey) }}
             </router-link>
+          </nav>
+
+          <!-- Header Actions -->
+          <div class="header-actions">
+            <ThemeToggle variant="simple" />
           </div>
 
           <!-- Mobile Menu Toggle -->
@@ -28,16 +38,23 @@
             @click="toggleMobileMenu"
             :aria-label="$t('navigation.toggleMenu')"
             :aria-expanded="isMobileMenuOpen"
+            aria-controls="mobile-nav"
+            type="button"
           >
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
+            <span class="hamburger-line" aria-hidden="true"></span>
+            <span class="hamburger-line" aria-hidden="true"></span>
+            <span class="hamburger-line" aria-hidden="true"></span>
           </button>
         </div>
 
         <!-- Mobile Navigation -->
-        <div class="mobile-nav" :class="{ open: isMobileMenuOpen }">
-          <div class="mobile-nav-links">
+        <div
+          id="mobile-nav"
+          class="mobile-nav"
+          :class="{ open: isMobileMenuOpen }"
+          :aria-hidden="!isMobileMenuOpen"
+        >
+          <nav class="mobile-nav-links" aria-label="Mobile navigation">
             <router-link
               v-for="item in navigationItems"
               :key="item.name"
@@ -45,10 +62,11 @@
               class="mobile-nav-link"
               :class="{ active: $route.name === item.name }"
               @click="closeMobileMenu"
+              :tabindex="isMobileMenuOpen ? 0 : -1"
             >
               {{ $t(item.translationKey) }}
             </router-link>
-          </div>
+          </nav>
         </div>
       </div>
     </nav>
@@ -57,6 +75,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import PersonalLogo from '@/components/ui/PersonalLogo.vue'
+import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 import type { NavigationItem } from '@/types'
 
 const isMobileMenuOpen = ref(false)
@@ -70,10 +90,23 @@ const navigationItems: NavigationItem[] = [
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
+
+  // Manage body scroll and focus
+  if (isMobileMenuOpen.value) {
+    document.body.classList.add('mobile-menu-open')
+    // Focus first mobile nav link after menu opens
+    setTimeout(() => {
+      const firstLink = document.querySelector('.mobile-nav-link') as HTMLElement
+      firstLink?.focus()
+    }, 100)
+  } else {
+    document.body.classList.remove('mobile-menu-open')
+  }
 }
 
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
+  document.body.classList.remove('mobile-menu-open')
 }
 
 const handleResize = () => {
@@ -108,10 +141,10 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid $border-color;
+  z-index: $z-fixed;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--color-border);
   transition: all $transition-normal;
 }
 
@@ -122,21 +155,15 @@ onUnmounted(() => {
 .nav-content {
   @include flex-between;
   align-items: center;
+  gap: $spacing-md;
 }
 
 .brand {
   text-decoration: none;
-  color: $primary-color;
-  font-weight: bold;
-  font-size: $font-size-xl;
-  transition: color $transition-normal;
+  transition: transform $transition-normal;
 
   &:hover {
-    color: $secondary-color;
-  }
-
-  .brand-text {
-    display: inline-block;
+    transform: scale(1.02);
   }
 }
 
@@ -149,9 +176,19 @@ onUnmounted(() => {
   }
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+
+  @include respond-to(md) {
+    gap: $spacing-md;
+  }
+}
+
 .nav-link {
   text-decoration: none;
-  color: $text-color;
+  color: var(--color-text);
   font-weight: 500;
   padding: $spacing-xs $spacing-sm;
   border-radius: $border-radius-md;
@@ -159,12 +196,12 @@ onUnmounted(() => {
   position: relative;
 
   &:hover {
-    color: $secondary-color;
-    background-color: rgba($secondary-color, 0.1);
+    color: var(--color-primary);
+    background-color: var(--color-background-light);
   }
 
   &.active {
-    color: $secondary-color;
+    color: var(--color-primary);
 
     &::after {
       content: '';
@@ -174,7 +211,7 @@ onUnmounted(() => {
       transform: translateX(-50%);
       width: 20px;
       height: 2px;
-      background-color: $secondary-color;
+      background-color: var(--color-primary);
       border-radius: 1px;
     }
   }
@@ -200,7 +237,7 @@ onUnmounted(() => {
   .hamburger-line {
     width: 24px;
     height: 2px;
-    background-color: $primary-color;
+    background-color: var(--color-text);
     transition: all $transition-normal;
     transform-origin: center;
 
@@ -227,7 +264,7 @@ onUnmounted(() => {
 
   &:hover {
     .hamburger-line {
-      background-color: $secondary-color;
+      background-color: var(--color-primary);
     }
   }
 }
@@ -249,7 +286,7 @@ onUnmounted(() => {
 
 .mobile-nav-links {
   padding: $spacing-lg 0;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
@@ -257,20 +294,20 @@ onUnmounted(() => {
 
 .mobile-nav-link {
   text-decoration: none;
-  color: $text-color;
+  color: var(--color-text);
   font-weight: 500;
   padding: $spacing-sm;
   border-radius: $border-radius-md;
   transition: all $transition-normal;
 
   &:hover {
-    color: $secondary-color;
-    background-color: rgba($secondary-color, 0.1);
+    color: var(--color-primary);
+    background-color: var(--color-background-light);
   }
 
   &.active {
-    color: $secondary-color;
-    background-color: rgba($secondary-color, 0.1);
+    color: var(--color-primary);
+    background-color: var(--color-background-light);
   }
 }
 

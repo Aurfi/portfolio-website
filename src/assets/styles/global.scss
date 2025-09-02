@@ -1,6 +1,10 @@
 @use 'sass:color';
 @use './variables.scss' as *;
 @use './mixins.scss' as *;
+@use './theme.scss';
+@use './animations.scss';
+@use './transitions.scss';
+@use './compatibility.scss';
 
 // Global Reset and Base Styles
 *,
@@ -20,10 +24,13 @@ body {
   font-family: $font-family-primary;
   font-size: $font-size-base;
   line-height: 1.6;
-  color: $text-color;
-  background-color: $background-color;
+  color: var(--color-text);
+  background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    color $transition-normal,
+    background-color $transition-normal;
 }
 
 // Typography
@@ -63,12 +70,12 @@ p {
 }
 
 a {
-  color: $secondary-color;
+  color: var(--color-secondary);
   text-decoration: none;
   transition: color $transition-normal;
 
   &:hover {
-    color: color.adjust($secondary-color, $lightness: -15%);
+    color: var(--color-secondary-dark);
   }
 }
 
@@ -156,7 +163,7 @@ a {
 
 // Focus styles
 :focus-visible {
-  outline: 2px solid $secondary-color;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 

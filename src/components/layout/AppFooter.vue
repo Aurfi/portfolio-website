@@ -1,16 +1,18 @@
 <template>
   <footer class="app-footer">
     <div class="app-footer__container">
-      <!-- Contact Information -->
+      <!-- Brand & Contact -->
       <div class="app-footer__section">
-        <h3 class="app-footer__title">{{ t('footer.contact') }}</h3>
+        <div class="app-footer__brand">
+          <PersonalLogo variant="combined" size="sm" :show-full-name="true" :show-tagline="true" />
+        </div>
         <div class="app-footer__contact">
           <a
-            href="mailto:name.firstname@domain.com"
+            href="mailto:john.developer@example.com"
             class="app-footer__email"
-            aria-label="Send email to name.firstname@domain.com"
+            aria-label="Send email to john.developer@example.com"
           >
-            name.firstname@domain.com
+            john.developer@example.com
           </a>
         </div>
       </div>
@@ -37,10 +39,16 @@
         </nav>
       </div>
 
-      <!-- Language Selector -->
+      <!-- Settings & Preferences -->
       <div class="app-footer__section">
-        <div class="app-footer__language">
-          <LanguageSelector size="small" />
+        <h3 class="app-footer__title">Preferences</h3>
+        <div class="app-footer__settings">
+          <div class="app-footer__language">
+            <LanguageSelector size="small" />
+          </div>
+          <div class="app-footer__theme">
+            <ThemeToggle variant="dropdown" />
+          </div>
         </div>
       </div>
     </div>
@@ -58,7 +66,9 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useI18n } from '@/composables/useI18n'
+import PersonalLogo from '@/components/ui/PersonalLogo.vue'
 import LanguageSelector from '@/components/ui/LanguageSelector.vue'
+import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 
 const { t } = useI18n()
 
@@ -72,8 +82,8 @@ const currentYear = computed(() => new Date().getFullYear())
 @use '@/assets/styles/mixins.scss' as *;
 
 .app-footer {
-  background-color: $background-light;
-  border-top: 1px solid $border-color;
+  background-color: var(--color-background-light);
+  border-top: 1px solid var(--color-border);
   margin-top: auto;
 
   &__container {
@@ -103,8 +113,18 @@ const currentYear = computed(() => new Date().getFullYear())
   &__title {
     font-size: $font-size-lg;
     font-weight: 600;
-    color: $text-color;
+    color: var(--color-text);
     margin-bottom: $spacing-md;
+  }
+
+  &__brand {
+    margin-bottom: $spacing-md;
+  }
+
+  &__settings {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
   }
 
   &__contact {
@@ -114,19 +134,19 @@ const currentYear = computed(() => new Date().getFullYear())
   }
 
   &__email {
-    color: $text-color;
+    color: var(--color-text);
     text-decoration: none;
     font-weight: 500;
     transition: color $transition-normal;
 
     &:hover,
     &:focus {
-      color: $secondary-color;
+      color: var(--color-primary);
       text-decoration: underline;
     }
 
     &:focus {
-      outline: 2px solid $secondary-color;
+      outline: 2px solid var(--color-primary);
       outline-offset: 2px;
       border-radius: $border-radius-sm;
     }
@@ -146,7 +166,7 @@ const currentYear = computed(() => new Date().getFullYear())
   }
 
   &__link {
-    color: $text-color;
+    color: var(--color-text);
     text-decoration: none;
     font-weight: 500;
     transition: color $transition-normal;
@@ -154,17 +174,17 @@ const currentYear = computed(() => new Date().getFullYear())
 
     &:hover,
     &:focus {
-      color: $secondary-color;
+      color: var(--color-primary);
     }
 
     &:focus {
-      outline: 2px solid $secondary-color;
+      outline: 2px solid var(--color-primary);
       outline-offset: 2px;
       border-radius: $border-radius-sm;
     }
 
     &.router-link-active {
-      color: $secondary-color;
+      color: var(--color-primary);
     }
   }
 
@@ -178,13 +198,13 @@ const currentYear = computed(() => new Date().getFullYear())
   }
 
   &__bottom {
-    border-top: 1px solid $border-color;
-    background-color: color.scale($background-light, $lightness: -3.0722891566%);
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-background-gray);
     padding: $spacing-md 0;
   }
 
   &__copyright {
-    color: $text-light;
+    color: var(--color-text-light);
     font-size: $font-size-sm;
     text-align: center;
     margin: 0;
