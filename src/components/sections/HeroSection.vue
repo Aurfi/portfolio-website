@@ -70,7 +70,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
 import PersonalLogo from '@/components/ui/PersonalLogo.vue'
 
 interface Props {
@@ -78,9 +77,6 @@ interface Props {
 }
 
 defineProps<Props>()
-
-// Set up i18n for template usage
-useI18n()
 
 // Skills to display
 const skills = computed(() => ['Vue.js', 'TypeScript', 'Node.js', 'Docker', 'Spring Boot'])
