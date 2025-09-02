@@ -158,7 +158,7 @@ onUnmounted(() => {
   transition: border-color $transition-normal;
 
   &:hover {
-    border-color: color.adjust($border-color, $lightness: -10%);
+    border-color: color.scale($border-color, $lightness: -10.8050847458%);
   }
 
   &:focus {
@@ -200,7 +200,7 @@ onUnmounted(() => {
     transition: all $transition-normal;
 
     &:hover {
-      border-color: color.adjust($border-color, $lightness: -10%);
+      border-color: color.scale($border-color, $lightness: -10.8050847458%);
       background-color: $background-light;
     }
 

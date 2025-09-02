@@ -1,0 +1,136 @@
+@use 'sass:color';
+@use 'sass:math';
+@use 'sass:list';
+@use 'sass:map';
+
+// Import variables
+@use './variables' as *;
+
+// ===================================
+// MODERN SASS COLOR FUNCTIONS
+// ===================================
+// These functions replace deprecated darken(), lighten(), etc.
+
+// Color lightness adjustments
+@function darken-color($color, $amount) {
+  @return color.adjust($color, $lightness: -$amount);
+}
+
+@function lighten-color($color, $amount) {
+  @return color.adjust($color, $lightness: $amount);
+}
+
+@function adjust-lightness($color, $lightness) {
+  @return color.adjust($color, $lightness: $lightness);
+}
+
+// Color saturation adjustments
+@function saturate-color($color, $amount) {
+  @return color.adjust($color, $saturation: $amount);
+}
+
+@function desaturate-color($color, $amount) {
+  @return color.adjust($color, $saturation: -$amount);
+}
+
+@function adjust-saturation($color, $saturation) {
+  @return color.adjust($color, $saturation: $saturation);
+}
+
+// Color hue adjustments
+@function adjust-hue($color, $hue) {
+  @return color.adjust($color, $hue: $hue);
+}
+
+// Alpha/opacity adjustments
+@function fade-color($color, $alpha) {
+  @return color.change($color, $alpha: $alpha);
+}
+
+@function transparentize-color($color, $amount) {
+  @return color.adjust($color, $alpha: -$amount);
+}
+
+@function opacify-color($color, $amount) {
+  @return color.adjust($color, $alpha: $amount);
+}
+
+// ===================================
+// UTILITY FUNCTIONS
+// ===================================
+
+// Get appropriate contrast color (black or white) for accessibility
+@function get-contrast-color($color) {
+  @if (color.lightness($color) > 50%) {
+    @return $text-color;
+  } @else {
+    @return #ffffff;
+  }
+}
+
+// Create color variations for themes
+@function create-color-palette($base-color) {
+  @return (
+    'base': $base-color,
+    'light': lighten-color($base-color, 20%),
+    'lighter': lighten-color($base-color, 40%),
+    'dark': darken-color($base-color, 20%),
+    'darker': darken-color($base-color, 40%),
+    'muted': desaturate-color($base-color, 30%),
+    'transparent': fade-color($base-color, 0.1)
+  );
+}
+
+// Mix two colors
+@function mix-colors($color1, $color2, $weight: 50%) {
+  @return color.mix($color1, $color2, $weight);
+}
+
+// Get complementary color
+@function complement-color($color) {
+  @return adjust-hue($color, 180deg);
+}
+
+// ===================================
+// BACKWARD COMPATIBILITY HELPERS
+// ===================================
+// These provide easy migration from deprecated functions
+
+@function darken($color, $amount) {
+  @return darken-color($color, $amount);
+}
+
+@function lighten($color, $amount) {
+  @return lighten-color($color, $amount);
+}
+
+@function saturate($color, $amount) {
+  @return saturate-color($color, $amount);
+}
+
+@function desaturate($color, $amount) {
+  @return desaturate-color($color, $amount);
+}
+
+@function transparentize($color, $amount) {
+  @return transparentize-color($color, $amount);
+}
+
+@function opacify($color, $amount) {
+  @return opacify-color($color, $amount);
+}
+
+@function rgba($color, $alpha) {
+  @return fade-color($color, $alpha);
+}
+
+// ===================================
+// EXPORTS
+// ===================================
+// Forward all Sass modules and variables for direct use
+
+@forward 'sass:color';
+@forward 'sass:math';
+@forward 'sass:list';
+@forward 'sass:map';
+@forward './variables';

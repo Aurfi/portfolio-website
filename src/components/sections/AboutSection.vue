@@ -293,7 +293,7 @@ const scrollToContact = () => {
   border-color: $primary-color;
 
   &:hover {
-    background: color.adjust($primary-color, $lightness: -10%);
+    background: color.scale($primary-color, $lightness: -41.1290322581%);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba($primary-color, 0.3);
   }

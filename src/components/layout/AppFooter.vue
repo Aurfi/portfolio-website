@@ -179,7 +179,7 @@ const currentYear = computed(() => new Date().getFullYear())
 
   &__bottom {
     border-top: 1px solid $border-color;
-    background-color: color.adjust($background-light, $lightness: -3%);
+    background-color: color.scale($background-light, $lightness: -3.0722891566%);
     padding: $spacing-md 0;
   }
 
