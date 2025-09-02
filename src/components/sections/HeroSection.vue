@@ -38,7 +38,11 @@
           <div class="profile-container">
             <div class="profile-image hover-glow">
               <!-- Placeholder for profile image -->
-              <div class="image-placeholder glass">
+              <!-- Blue gradient background that breathes -->
+              <div class="avatar-background"></div>
+              
+              <!-- Fixed logo content -->
+              <div class="avatar-content">
                 <PersonalLogo variant="icon" size="xl" />
               </div>
             </div>
@@ -358,17 +362,13 @@ const scrollToContact = () => {
   }
 }
 
-.image-placeholder {
+.avatar-background {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  
-  // Main gradient layer
   background: linear-gradient(
     135deg,
     $primary-color 0%,
@@ -379,77 +379,27 @@ const scrollToContact = () => {
   animation: 
     appleGradientFlow 28s $ease-in-out-quart infinite,
     avatarBreathing 16s $ease-in-out-quart infinite;
-  
-  // Subtle overlay gradient for depth
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      transparent 30%,
-      transparent 70%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-    background-size: 300% 300%;
-    animation: subtleShimmer 20s $ease-in-out-quart infinite;
-    pointer-events: none;
-  }
-  
-  // Ambient glow effect
-  &::after {
-    content: '';
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    right: -10%;
-    bottom: -10%;
-    background: linear-gradient(
-      135deg,
-      rgba($primary-color, 0.2) 0%,
-      rgba($secondary-color, 0.15) 100%
-    );
-    background-size: 300% 300%;
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.7;
-    z-index: -1;
-    animation: appleGlowFlow 36s $ease-in-out-quart infinite;
-  }
+}
 
+.avatar-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   :deep(svg) {
-    width: 80% !important;
-    height: 80% !important;
+    width: 240px !important;
+    height: 240px !important;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
-    display: block !important;
-    margin: 0 auto !important;
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    animation: counterBreathing 16s $ease-in-out-quart infinite !important;
   }
 
   :deep(text) {
     font-size: 24px !important;
     font-weight: 700 !important;
-  }
-
-  .initials {
-    font-size: 6rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 2;
-
-    @include respond-to(lg) {
-      font-size: 8rem;
-    }
   }
 }
 
@@ -689,13 +639,13 @@ const scrollToContact = () => {
   }
 }
 
-// Counter-scale for SVG to keep it fixed size
+// Counter-scale to keep logo fixed size
 @keyframes counterBreathing {
   0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(5);
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.33);
+    transform: translate(-50%, -50%) scale(6.65);
   }
 }
 

@@ -10,6 +10,9 @@ import ProjectsSection from '@/components/sections/ProjectsSection.vue'
       <!-- Hero Section -->
       <HeroSection id="hero" class="hero-section" />
       
+      <!-- Featured Projects -->
+      <ProjectsSection id="featured-projects" />
+      
       <!-- Quick About -->
       <section class="quick-about section">
         <div class="container">
@@ -38,9 +41,6 @@ import ProjectsSection from '@/components/sections/ProjectsSection.vue'
           </div>
         </div>
       </section>
-      
-      <!-- Featured Projects -->
-      <ProjectsSection id="featured-projects" />
       
       <!-- Call to Action -->
       <section class="cta-section section">

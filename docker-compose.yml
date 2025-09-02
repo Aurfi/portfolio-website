@@ -1,0 +1,25 @@
+services:
+  portfolio-dev:
+    build: .
+    ports:
+      - "7389:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
+
+  portfolio-preview:
+    build: .
+    ports:
+      - "7390:4173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=production
+    command: sh -c "npm run build && npm run preview -- --host 0.0.0.0"
+    stdin_open: true
+    tty: true

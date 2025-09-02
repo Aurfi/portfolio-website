@@ -54,7 +54,10 @@
       </div>
 
       <!-- Featured Badge -->
-      <div v-if="project.featured" class="featured-badge">⭐ {{ $t('projects.featured') }}</div>
+      <div v-if="project.featured" class="featured-badge">
+        <AppIcon name="star" size="xs" solid />
+        {{ $t('projects.featured') }}
+      </div>
 
       <!-- Complexity Indicator -->
       <div class="complexity-badge" :class="`complexity-${project.complexity.level}`">
@@ -85,10 +88,6 @@
           <span class="metadata-label">{{ $t('projects.completed') }}:</span>
           <span class="metadata-value">{{ formatDate(project.completionDate) }}</span>
         </div>
-        <div v-if="project.complexity.linesOfCode" class="metadata-item">
-          <span class="metadata-label">{{ $t('projects.linesOfCode') }}:</span>
-          <span class="metadata-value">{{ formatNumber(project.complexity.linesOfCode) }}</span>
-        </div>
       </div>
 
       <!-- Technology Tags -->
@@ -104,7 +103,7 @@
       <!-- Key Highlights Preview -->
       <div v-if="project.highlights.en.length > 0" class="highlights-preview">
         <div class="highlight-item">
-          <span class="highlight-icon">✓</span>
+          <AppIcon name="check" size="xs" class="highlight-icon" />
           <span class="highlight-text">{{ project.highlights.en[0] }}</span>
         </div>
         <div v-if="project.highlights.en.length > 1" class="more-highlights">
@@ -117,15 +116,15 @@
     <div class="project-footer">
       <div class="project-stats">
         <div class="stat-item">
-          <span class="stat-icon">🏗️</span>
+          <AppIcon name="wrench" size="xs" class="stat-icon" />
           <span class="stat-text">{{ project.complexity.level }}</span>
         </div>
         <div v-if="!project.isExternal" class="stat-item">
-          <span class="stat-icon">🔗</span>
+          <AppIcon name="link" size="xs" class="stat-icon" />
           <span class="stat-text">{{ $t('projects.integrated') }}</span>
         </div>
         <div v-else class="stat-item">
-          <span class="stat-icon">🌐</span>
+          <AppIcon name="globe" size="xs" class="stat-icon" />
           <span class="stat-text">{{ $t('projects.external') }}</span>
         </div>
       </div>
@@ -137,6 +136,7 @@
 import { computed } from 'vue'
 import type { Project } from '@/types'
 import LazyImage from '@/components/ui/LazyImage.vue'
+import AppIcon from '@/components/ui/AppIcon.vue'
 
 interface Props {
   project: Project
@@ -299,6 +299,9 @@ const formatNumber = (num: number) => {
   font-size: $font-size-xs;
   font-weight: 600;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
 }
 
 .complexity-badge {
@@ -426,7 +429,6 @@ const formatNumber = (num: number) => {
 
 .highlight-icon {
   color: $success-color;
-  font-weight: 600;
   flex-shrink: 0;
 }
 
@@ -465,7 +467,7 @@ const formatNumber = (num: number) => {
 }
 
 .stat-icon {
-  font-size: $font-size-sm;
+  color: $text-color-light;
 }
 
 .stat-text {

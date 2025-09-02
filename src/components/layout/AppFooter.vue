@@ -53,7 +53,7 @@
     <!-- Copyright -->
     <div class="app-footer__bottom">
       <div class="app-footer__container">
-        <p class="app-footer__copyright">WEBSITE MADE BY AN AI</p>
+        <p class="app-footer__copyright">Built with AI assistance</p>
       </div>
     </div>
   </footer>

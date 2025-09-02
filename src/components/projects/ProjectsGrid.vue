@@ -29,7 +29,7 @@
           :aria-label="`Filter by ${category.name.en}, ${getProjectCount(category.id)} projects`"
           type="button"
         >
-          <span class="category-icon" :data-icon="category.icon" aria-hidden="true"></span>
+          <AppIcon :name="getIconName(category.icon)" size="xs" class="category-icon" />
           <span class="category-name">{{ category.name.en }}</span>
           <span class="category-count" aria-hidden="true">{{ getProjectCount(category.id) }}</span>
         </button>
@@ -61,7 +61,7 @@
       role="status"
       aria-live="polite"
     >
-      <div class="empty-icon" aria-hidden="true">📂</div>
+      <AppIcon name="folder" size="xl" class="empty-icon" />
       <h3>{{ $t('projects.noProjectsFound') }}</h3>
       <p>{{ $t('projects.tryDifferentFilter') }}</p>
       <button class="reset-filter-btn" @click="selectCategory('all')" type="button">
@@ -84,6 +84,7 @@ import { projectCategories, getProjectsByCategory } from '@/data/projects'
 import type { Project } from '@/types'
 import ProjectCard from './ProjectCard.vue'
 import ProjectDetailModal from './ProjectDetailModal.vue'
+import AppIcon from '@/components/ui/AppIcon.vue'
 import { useAccessibility } from '@/composables/useAccessibility'
 
 // Composables
@@ -126,6 +127,17 @@ const openProjectModal = (project: Project) => {
 
 const closeProjectModal = () => {
   selectedProject.value = null
+}
+
+const getIconName = (iconType: string) => {
+  const iconMapping = {
+    'grid': 'grid',
+    'globe': 'globe', 
+    'smartphone': 'mobile',
+    'server': 'desktop',
+    'layout': 'paint'
+  }
+  return iconMapping[iconType as keyof typeof iconMapping] || 'grid'
 }
 
 </script>
@@ -213,28 +225,7 @@ const closeProjectModal = () => {
   }
 
   .category-icon {
-    width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-
-    &[data-icon='grid']::before {
-      content: '⊞';
-    }
-    &[data-icon='globe']::before {
-      content: '🌐';
-    }
-    &[data-icon='smartphone']::before {
-      content: '📱';
-    }
-    &[data-icon='server']::before {
-      content: '🖥️';
-    }
-    &[data-icon='layout']::before {
-      content: '🎨';
-    }
+    flex-shrink: 0;
   }
 
   .category-name {
@@ -279,9 +270,11 @@ const closeProjectModal = () => {
   color: $text-color-light;
 
   .empty-icon {
-    font-size: 4rem;
-    margin-bottom: $spacing-lg;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto $spacing-lg;
     opacity: 0.5;
+    color: $text-color-light;
   }
 
   h3 {

@@ -31,9 +31,14 @@
     "generate:icons": "node scripts/generate-icons.js && node scripts/generate-screenshots.js",
     "integration:final": "node scripts/final-integration.cjs",
     "format:check": "prettier --check .",
-    "qa:run": "npm run integration:final"
+    "qa:run": "npm run integration:final",
+    "docker:dev": "docker-compose up portfolio-dev",
+    "docker:preview": "docker-compose up portfolio-preview",
+    "docker:build": "docker-compose build",
+    "docker:down": "docker-compose down"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.2",
     "pinia": "^3.0.3",
