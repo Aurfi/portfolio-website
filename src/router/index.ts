@@ -123,6 +123,21 @@ const router = createRouter({
   },
 })
 
+// Handle GitHub Pages SPA fallback
+// This handles URLs redirected from 404.html for direct access to routes
+const handleSPAFallback = () => {
+  const query = window.location.search
+  if (query.startsWith('?/')) {
+    const path = query.slice(2).replace(/&/g, '?').replace(/~and~/g, '&')
+    if (path !== window.location.pathname) {
+      window.history.replaceState(null, '', path + window.location.hash)
+    }
+  }
+}
+
+// Call on initial load
+handleSPAFallback()
+
 // Global navigation guards
 router.beforeEach((to, from, next) => {
   // Set document title based on route meta

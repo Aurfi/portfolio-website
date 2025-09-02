@@ -83,7 +83,8 @@
   },
   "footer": {
     "contact": "Contact",
-    "selectLanguage": "Select Language"
+    "selectLanguage": "Select Language",
+    "aiDisclaimer": "This portfolio website was created with AI assistance"
   },
   "common": {
     "loading": "Loading...",

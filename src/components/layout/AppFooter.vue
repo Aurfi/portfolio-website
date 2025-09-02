@@ -49,6 +49,9 @@
     <div class="app-footer__bottom">
       <div class="app-footer__container">
         <p class="app-footer__copyright">© {{ currentYear }} Portfolio. All rights reserved.</p>
+        <p class="app-footer__disclaimer">
+          {{ t('footer.aiDisclaimer') }}
+        </p>
       </div>
     </div>
   </footer>
@@ -187,6 +190,15 @@ const currentYear = computed(() => new Date().getFullYear())
     font-size: $font-size-sm;
     text-align: center;
     margin: 0;
+  }
+
+  &__disclaimer {
+    color: $text-light;
+    font-size: $font-size-xs;
+    text-align: center;
+    margin: $spacing-xs 0 0 0;
+    font-style: italic;
+    opacity: 0.8;
   }
 }
 </style>
