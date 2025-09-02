@@ -93,6 +93,7 @@ const { announce } = useAccessibility()
 // Reactive state
 const selectedCategory = ref('all')
 const selectedProject = ref<Project | null>(null)
+const isLoading = ref(false)
 
 // Computed properties
 const categories = computed(() => projectCategories)

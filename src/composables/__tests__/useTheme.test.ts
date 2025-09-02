@@ -85,9 +85,9 @@ describe('useTheme', () => {
 
     createApp(component).mount(document.createElement('div'))
 
-    result?.setTheme('dark')
-    expect(result?.currentTheme.value).toBe('dark')
-    expect(localStorage.setItem).toHaveBeenCalledWith('portfolio-theme', 'dark')
+    result?.setTheme('high-contrast')
+    expect(result?.currentTheme.value).toBe('high-contrast')
+    expect(localStorage.setItem).toHaveBeenCalledWith('portfolio-theme', 'high-contrast')
   })
 
   it('cycles through themes correctly', () => {
@@ -102,15 +102,15 @@ describe('useTheme', () => {
 
     createApp(component).mount(document.createElement('div'))
 
-    // Start with auto
-    expect(result?.currentTheme.value).toBe('auto')
+    // Start with default
+    expect(result?.currentTheme.value).toBe('default')
 
-    // The cycle order might be different, let's just test that it cycles
-    const initialTheme = result?.currentTheme.value
-    result?.cycleTheme()
-    const secondTheme = result?.currentTheme.value
+    // Toggle to high-contrast
+    result?.toggleTheme()
+    expect(result?.currentTheme.value).toBe('high-contrast')
 
-    expect(secondTheme).not.toBe(initialTheme)
-    expect(['light', 'dark', 'auto', 'high-contrast']).toContain(secondTheme)
+    // Toggle back to default
+    result?.toggleTheme()
+    expect(result?.currentTheme.value).toBe('default')
   })
 })

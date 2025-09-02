@@ -5,13 +5,10 @@ export class ResumePDFGenerator {
   private pdf: jsPDF
   private currentY: number = 0
   private pageWidth: number
-  private pageHeight: number
   private margin: number = 20
   private primaryColor: string = '#3b82f6' // Website primary blue
-  private secondaryColor: string = '#1e40af' // Website secondary blue
   private textColor: string = '#1f2937'
   private lightGray: string = '#6b7280'
-  private backgroundColor: string = '#f8fafc'
 
   constructor() {
     this.pdf = new jsPDF({
@@ -70,52 +67,6 @@ export class ResumePDFGenerator {
     this.pdf.line(this.margin, startY + height - 1, this.pageWidth - this.margin, startY + height - 1)
   }
 
-  private addSkillTag(text: string, x: number, y: number, maxWidth: number): number {
-    const textWidth = this.pdf.getTextWidth(text) + 6 // padding
-    const tagHeight = 6
-    
-    // Background
-    this.pdf.setFillColor(59, 130, 246, 0.1) // Primary color with opacity
-    this.pdf.roundedRect(x, y - 4, textWidth, tagHeight, 2, 2, 'F')
-    
-    // Border
-    this.pdf.setDrawColor(59, 130, 246, 0.3)
-    this.pdf.setLineWidth(0.3)
-    this.pdf.roundedRect(x, y - 4, textWidth, tagHeight, 2, 2, 'S')
-    
-    // Text - use blue instead of black
-    this.pdf.setTextColor(this.primaryColor)
-    this.pdf.setFontSize(8)
-    this.pdf.setFont('helvetica', 'normal')
-    this.pdf.text(text, x + 3, y)
-    
-    return textWidth + 4 // return width including spacing
-  }
-
-  private addSectionIcon(x: number, y: number, type: string) {
-    this.pdf.setFillColor(59, 130, 246)
-    
-    switch(type) {
-      case 'experience':
-        // Briefcase icon (simplified)
-        this.pdf.roundedRect(x, y - 3, 8, 6, 1, 1, 'F')
-        this.pdf.setFillColor(255, 255, 255)
-        this.pdf.roundedRect(x + 2, y - 1, 4, 2, 0.5, 0.5, 'F')
-        break;
-      case 'skills':
-        // Gear icon (simplified)
-        this.pdf.circle(x + 4, y, 3, 'F')
-        this.pdf.setFillColor(255, 255, 255)
-        this.pdf.circle(x + 4, y, 1.5, 'F')
-        break;
-      case 'education':
-        // Graduation cap (simplified)
-        this.pdf.roundedRect(x, y - 2, 8, 4, 1, 1, 'F')
-        this.pdf.setFillColor(255, 255, 255)
-        this.pdf.roundedRect(x + 1, y - 1, 6, 2, 0.5, 0.5, 'F')
-        break;
-    }
-  }
 
   private addSection(title: string) {
     this.currentY += 8
@@ -169,7 +120,7 @@ export class ResumePDFGenerator {
     // Experience
     this.addSection('Professional Experience')
     
-    data.experience.forEach((job, index) => {
+    data.experience.forEach((job) => {
       // Add subtle background for each job entry
       const entryHeight = 2 + job.description.length * 4 + 8
       this.pdf.setFillColor(248, 250, 252)

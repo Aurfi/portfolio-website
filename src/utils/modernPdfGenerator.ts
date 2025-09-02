@@ -45,26 +45,6 @@ export class ModernResumePDFGenerator {
     return [rgb.r, rgb.g, rgb.b]
   }
 
-  private setFont(type: 'header' | 'subheader' | 'body' | 'caption', style: 'normal' | 'bold' = 'normal') {
-    switch (type) {
-      case 'header':
-        this.pdf.setFont('helvetica', 'bold')
-        this.pdf.setFontSize(28)
-        break
-      case 'subheader':
-        this.pdf.setFont('helvetica', style === 'bold' ? 'bold' : 'normal')
-        this.pdf.setFontSize(16)
-        break
-      case 'body':
-        this.pdf.setFont('helvetica', style === 'bold' ? 'bold' : 'normal')
-        this.pdf.setFontSize(11)
-        break
-      case 'caption':
-        this.pdf.setFont('helvetica', style === 'bold' ? 'bold' : 'normal')
-        this.pdf.setFontSize(9)
-        break
-    }
-  }
 
   private addText(text: string, x: number, y: number, options: {
     fontSize?: number
@@ -123,7 +103,7 @@ export class ModernResumePDFGenerator {
     this.pdf.line(x + width * 0.35, y, x + width * 0.7, y)
   }
 
-  private createModernHeader(personalInfo: any): void {
+  private createModernHeader(personalInfo: { name: string; email: string; phone: string; location: string }): void {
     // Dark header background
     this.addBackgroundRect(0, 0, this.pageWidth, 55, this.colors.primary)
     
@@ -184,7 +164,7 @@ export class ModernResumePDFGenerator {
     return text.replace(/(\d+%|\$\d+(?:,\d+)*|\d+\+|\d+(?:,\d+)*)/g, '→ $1')
   }
 
-  private addExperienceItem(job: any, x: number, y: number, width: number): number {
+  private addExperienceItem(job: { title: string; company: string; period: string; description: string[] }, x: number, y: number, width: number): number {
     let currentY = y
     
     // Job title - prominent
