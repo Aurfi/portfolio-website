@@ -17,7 +17,7 @@
             <div class="contact-method">
               <h3>{{ $t('contact.email') }}</h3>
               <a href="mailto:name.firstname@domain.com" class="contact-link">
-                name.firstname@domain.com
+                name.firstname{{ '@' }}domain.com
               </a>
             </div>
 
