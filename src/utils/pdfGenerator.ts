@@ -17,7 +17,6 @@ export class ResumePDFGenerator {
       format: 'a4'
     })
     this.pageWidth = this.pdf.internal.pageSize.getWidth()
-    this.pageHeight = this.pdf.internal.pageSize.getHeight()
     this.currentY = this.margin
   }
 

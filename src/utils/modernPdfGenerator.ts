@@ -103,7 +103,7 @@ export class ModernResumePDFGenerator {
     this.pdf.line(x + width * 0.35, y, x + width * 0.7, y)
   }
 
-  private createModernHeader(personalInfo: { name: string; email: string; phone: string; location: string }): void {
+  private createModernHeader(personalInfo: { name: string; email: string; phone?: string; location: string; website?: string }): void {
     // Dark header background
     this.addBackgroundRect(0, 0, this.pageWidth, 55, this.colors.primary)
     
@@ -129,7 +129,7 @@ export class ModernResumePDFGenerator {
       personalInfo.phone,
       personalInfo.location,
       personalInfo.website
-    ].filter(Boolean)
+    ].filter((item): item is string => Boolean(item))
     
     const contactWidth = (this.pageWidth - 2 * this.margin) / contacts.length
     contacts.forEach((contact, index) => {
