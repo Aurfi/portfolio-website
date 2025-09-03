@@ -7,7 +7,7 @@
       <div class="nav-content">
         <!-- Logo/Brand -->
         <router-link to="/" class="brand" @click="handleBrandClick">
-          <span class="brand-text">Portfolio</span>
+          <span class="brand-text">{{ $t('common.portfolio') }}</span>
         </router-link>
 
         <!-- Desktop Section Navigation -->

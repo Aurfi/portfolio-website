@@ -7,7 +7,6 @@ import App from './App.vue'
 import router from './router'
 import { i18n } from './i18n'
 import { injectAccessibilityStyles } from './composables/useAccessibility'
-import { setupGlobalErrorHandler } from './composables/useErrorHandler'
 
 const app = createApp(App)
 
@@ -18,7 +17,9 @@ app.use(i18n)
 // Inject accessibility styles
 injectAccessibilityStyles()
 
-// Setup global error handler
-setupGlobalErrorHandler()
+// Setup global error handler after app is created
+import('./composables/useErrorHandler').then(({ setupGlobalErrorHandler }) => {
+  setupGlobalErrorHandler()
+})
 
 app.mount('#app')

@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
+import { useI18n } from '@/composables/useI18n'
 
 export interface ResumeData {
   personalInfo: {
@@ -36,6 +37,8 @@ export interface ResumeData {
 }
 
 export function useResumeGenerator() {
+  const { t } = useI18n()
+  
   const generateResumePDF = async (data: ResumeData): Promise<void> => {
     try {
       // Create a temporary HTML element for the resume
@@ -108,12 +111,12 @@ export function useResumeGenerator() {
       </div>
 
       <div style="margin-bottom: 25px;">
-        <h3 style="margin: 0 0 10px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Professional Summary</h3>
+        <h3 style="margin: 0 0 10px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">${t('common.resume.professionalSummary')}</h3>
         <p style="margin: 0; text-align: justify;">${data.summary}</p>
       </div>
 
       <div style="margin-bottom: 25px;">
-        <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Professional Experience</h3>
+        <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">${t('common.resume.professionalExperience')}</h3>
         ${data.experience
           .map(
             (exp) => `
@@ -141,7 +144,7 @@ export function useResumeGenerator() {
 
       <div style="display: flex; gap: 30px;">
         <div style="flex: 1;">
-          <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Education</h3>
+          <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">${t('common.resume.education')}</h3>
           ${data.education
             .map(
               (edu) => `
@@ -159,7 +162,7 @@ export function useResumeGenerator() {
         </div>
 
         <div style="flex: 1;">
-          <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Technical Skills</h3>
+          <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">${t('common.resume.technicalSkills')}</h3>
           ${data.skills
             .map(
               (skillGroup) => `
@@ -177,7 +180,7 @@ export function useResumeGenerator() {
         data.certifications && data.certifications.length > 0
           ? `
         <div style="margin-top: 25px;">
-          <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Certifications</h3>
+          <h3 style="margin: 0 0 15px 0; font-size: 16px; color: #2563eb; font-weight: 600; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">${t('common.resume.certifications')}</h3>
           ${data.certifications
             .map(
               (cert) => `

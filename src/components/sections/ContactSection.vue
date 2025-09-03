@@ -78,7 +78,7 @@
             aria-labelledby="contact-form-title"
             novalidate
           >
-            <h3 id="contact-form-title" class="sr-only">Contact Form</h3>
+            <h3 id="contact-form-title" class="sr-only">{{ $t('accessibility.screenReader.formLandmark') }}</h3>
             <div class="form-group">
               <label for="name" class="form-label">{{ $t('contact.form.name') }}</label>
               <input

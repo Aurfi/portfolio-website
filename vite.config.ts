@@ -137,11 +137,9 @@ export default defineConfig({
             if (id.includes('/sections/')) {
               return 'sections-components'
             }
-            if (id.includes('/ui/')) {
-              return 'ui-components'
-            }
-            if (id.includes('/layout/')) {
-              return 'layout-components'
+            // Merge ui and layout components to avoid circular dependency issues
+            if (id.includes('/ui/') || id.includes('/layout/')) {
+              return 'ui-layout-components'
             }
             return 'components'
           }
@@ -226,14 +224,14 @@ export default defineConfig({
   },
 
   // Enable experimental features for better performance
-  experimental: {
-    renderBuiltUrl(filename, { hostType }) {
-      if (hostType === 'js') {
-        return { js: `/${filename}` }
-      }
-      return { relative: true }
-    },
-  },
+  // experimental: {
+  //   renderBuiltUrl(filename, { hostType }) {
+  //     if (hostType === 'js') {
+  //       return { js: `/${filename}` }
+  //     }
+  //     return { relative: true }
+  //   },
+  // },
 
   // Vitest configuration
   test: {

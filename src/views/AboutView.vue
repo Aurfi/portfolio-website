@@ -36,7 +36,7 @@
         <div class="content-grid">
           <!-- Story Section -->
           <div class="about-story">
-            <h2 class="section-title">My Story</h2>
+            <h2 class="section-title">{{ $t('common.myStory') }}</h2>
             <div class="story-content">
               <p class="story-paragraph">
                 {{ $t('about.description1') }}
@@ -52,38 +52,38 @@
 
           <!-- Skills Section -->
           <div class="skills-section">
-            <h2 class="section-title">Technical Skills</h2>
+            <h2 class="section-title">{{ $t('common.technicalSkills') }}</h2>
             <div class="skills-grid">
               <div class="skill-category">
                 <h3 class="skill-category-title">{{ $t('about.frontend') }}</h3>
                 <div class="skill-tags">
-                  <span class="skill-tag">Vue.js</span>
-                  <span class="skill-tag">React</span>
-                  <span class="skill-tag">TypeScript</span>
-                  <span class="skill-tag">SCSS</span>
-                  <span class="skill-tag">Tailwind CSS</span>
+                  <span class="skill-tag">{{ $t('common.skills.vue') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.react') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.typescript') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.scss') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.tailwindcss') }}</span>
                 </div>
               </div>
               
               <div class="skill-category">
                 <h3 class="skill-category-title">{{ $t('about.backend') }}</h3>
                 <div class="skill-tags">
-                  <span class="skill-tag">Node.js</span>
-                  <span class="skill-tag">Spring Boot</span>
-                  <span class="skill-tag">PostgreSQL</span>
-                  <span class="skill-tag">Redis</span>
-                  <span class="skill-tag">REST APIs</span>
+                  <span class="skill-tag">{{ $t('common.skills.nodejs') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.springboot') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.postgresql') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.mongodb') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.restapis') }}</span>
                 </div>
               </div>
               
               <div class="skill-category">
                 <h3 class="skill-category-title">{{ $t('about.tools') }}</h3>
                 <div class="skill-tags">
-                  <span class="skill-tag">Docker</span>
-                  <span class="skill-tag">AWS</span>
-                  <span class="skill-tag">Git</span>
-                  <span class="skill-tag">Figma</span>
-                  <span class="skill-tag">VS Code</span>
+                  <span class="skill-tag">{{ $t('common.skills.docker') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.aws') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.git') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.figma') }}</span>
+                  <span class="skill-tag">{{ $t('common.skills.vscode') }}</span>
                 </div>
               </div>
             </div>
@@ -100,8 +100,8 @@
           <div class="timeline-item">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
-              <h3 class="timeline-title">Senior Full-Stack Developer</h3>
-              <p class="timeline-company">TechCorp Solutions</p>
+              <h3 class="timeline-title">{{ $t('common.positions.seniorFullstackDeveloper') }}</h3>
+              <p class="timeline-company">{{ $t('common.companies.techcorp') }}</p>
               <p class="timeline-period">2022 - Present</p>
               <p class="timeline-description">
                 Leading development of scalable web applications using Vue.js and Spring Boot. 
@@ -113,8 +113,8 @@
           <div class="timeline-item">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
-              <h3 class="timeline-title">Full-Stack Developer</h3>
-              <p class="timeline-company">InnovateLabs</p>
+              <h3 class="timeline-title">{{ $t('common.positions.fullstackDeveloper') }}</h3>
+              <p class="timeline-company">{{ $t('common.companies.innovatelabs') }}</p>
               <p class="timeline-period">2020 - 2022</p>
               <p class="timeline-description">
                 Developed and maintained multiple client projects using modern web technologies. 
@@ -126,8 +126,8 @@
           <div class="timeline-item">
             <div class="timeline-marker"></div>
             <div class="timeline-content">
-              <h3 class="timeline-title">Frontend Developer</h3>
-              <p class="timeline-company">StartupVenture</p>
+              <h3 class="timeline-title">{{ $t('common.positions.frontendDeveloper') }}</h3>
+              <p class="timeline-company">{{ $t('common.companies.startupventure') }}</p>
               <p class="timeline-period">2019 - 2020</p>
               <p class="timeline-description">
                 Built responsive web applications and contributed to the company's design system. 

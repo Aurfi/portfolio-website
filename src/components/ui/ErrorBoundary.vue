@@ -6,13 +6,13 @@
       <p class="error-message">{{ errorMessage }}</p>
 
       <div class="error-actions">
-        <button @click="retry" class="retry-button" v-if="retryable">Try Again</button>
-        <button @click="reset" class="reset-button">Reset</button>
-        <button @click="goHome" class="home-button">Go Home</button>
+        <button @click="retry" class="retry-button" v-if="retryable">{{ $t('common.errorBoundary.retry') }}</button>
+        <button @click="reset" class="reset-button">{{ $t('common.errorBoundary.reset') }}</button>
+        <button @click="goHome" class="home-button">{{ $t('common.errorBoundary.goHome') }}</button>
       </div>
 
       <details v-if="showDetails" class="error-details">
-        <summary>Technical Details</summary>
+        <summary>{{ $t('common.errorBoundary.technicalDetails') }}</summary>
         <pre>{{ errorStack }}</pre>
       </details>
     </div>

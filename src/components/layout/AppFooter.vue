@@ -41,7 +41,7 @@
 
       <!-- Settings & Preferences -->
       <div class="app-footer__section">
-        <h3 class="app-footer__title">Preferences</h3>
+        <h3 class="app-footer__title">{{ t('common.preferences') }}</h3>
         <div class="app-footer__settings">
           <div class="app-footer__language">
             <LanguageSelector size="small" />
@@ -53,7 +53,7 @@
     <!-- Copyright -->
     <div class="app-footer__bottom">
       <div class="app-footer__container">
-        <p class="app-footer__copyright">Built with AI assistance</p>
+        <p class="app-footer__copyright">{{ t('footer.aiDisclaimer') }}</p>
       </div>
     </div>
   </footer>

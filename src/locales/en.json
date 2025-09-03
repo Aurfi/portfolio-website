@@ -111,7 +111,7 @@
   "footer": {
     "contact": "Contact",
     "selectLanguage": "Select Language",
-    "aiDisclaimer": "This portfolio website was created with AI assistance"
+    "aiDisclaimer": "Built with AI assistance"
   },
   "cta": {
     "title": "Let's Work Together",
@@ -125,12 +125,53 @@
     "close": "Close",
     "success": "Success",
     "warning": "Warning",
+    "reset": "Reset",
+    "portfolio": "Portfolio",
+    "preferences": "Preferences",
+    "myStory": "My Story",
+    "technicalSkills": "Technical Skills",
+    "timeline": "Experience Timeline",
     "errorBoundary": {
       "title": "Something went wrong",
       "message": "We encountered an unexpected error. Please try refreshing the page or return to the homepage.",
       "retry": "Try Again",
-      "goHome": "Go to Homepage",
+      "goHome": "Go Home",
+      "reset": "Reset",
       "technicalDetails": "Technical Details"
+    },
+    "resume": {
+      "professionalSummary": "Professional Summary",
+      "professionalExperience": "Professional Experience",
+      "education": "Education",
+      "technicalSkills": "Technical Skills",
+      "certifications": "Certifications"
+    },
+    "skills": {
+      "vue": "Vue.js",
+      "react": "React",
+      "typescript": "TypeScript",
+      "scss": "SCSS",
+      "tailwindcss": "Tailwind CSS",
+      "nodejs": "Node.js",
+      "springboot": "Spring Boot",
+      "postgresql": "PostgreSQL",
+      "mongodb": "Redis",
+      "restapis": "REST APIs",
+      "git": "Git",
+      "docker": "Docker",
+      "aws": "AWS",
+      "figma": "Figma",
+      "vscode": "VS Code"
+    },
+    "companies": {
+      "techcorp": "TechCorp Solutions",
+      "innovatelabs": "InnovateLabs",
+      "startupventure": "StartupVenture"
+    },
+    "positions": {
+      "seniorFullstackDeveloper": "Senior Full-Stack Developer",
+      "fullstackDeveloper": "Full-Stack Developer",
+      "frontendDeveloper": "Frontend Developer"
     }
   },
   "accessibility": {
