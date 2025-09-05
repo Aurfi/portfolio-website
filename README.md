@@ -176,7 +176,7 @@ This project is open source and available under the [MIT License](LICENSE).
 - Built with [Vue.js](https://vuejs.org/)
 - Styled with [SCSS](https://sass-lang.com/)
 - Deployed on [GitHub Pages](https://pages.github.com/)
-- **Created with AI assistance** for rapid development and best practices
+- **Created with AI assistance** for rapid development
 
 ---
 
